@@ -49,5 +49,7 @@ Submit `https://www.aion2namegenerator.org/sitemap.xml` under the
 
 ## Updating
 
+- Analytics: GA4 property `Aion 2 Name Generator`, web stream `Aion 2 Name Generator — Web`, measurement ID `G-78SPRSKSMN`. The shared layout in `build.mjs` includes one Google tag per page, with Google signals and advertising personalization disabled. The privacy page describes analytics collection.
+
 - Server list: edit `EU_ELYOS`, `EU_ASMO`, `LAUNCH_NEW`, `LAUNCH_MORE` in `build.mjs`, and bump `SITE.updated`.
 - Static example names are seeded, so they stay stable between builds. Change a seed to reshuffle a list.

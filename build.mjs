@@ -15,6 +15,7 @@ const DIST = path.join(ROOT, 'dist');
 const SITE = {
   url: 'https://www.aion2namegenerator.org',
   name: 'Aion 2 Name Generator',
+  ga4MeasurementId: 'G-78SPRSKSMN',
   updated: '2026-10-07',
   updatedHuman: 'October 7, 2026'
 };
@@ -534,9 +535,12 @@ pages.push({
 <h2>Data stored on your device</h2>
 <p>When you save names with the ☆ button, they're stored in your browser's local storage on your own device. They're never sent to us, and you can clear them at any time with the "Clear" button or by clearing your browser data.</p>
 <h2>Server logs and third parties</h2>
-<p>Like most websites, our hosting provider may keep standard server logs (such as IP address, browser type and pages requested) for security and performance. Fonts are loaded from Google Fonts, which may receive your IP address when fonts load. If we add analytics or advertising in the future, this policy will be updated to describe it.</p>
+<p>Like most websites, our hosting provider may keep standard server logs (such as IP address, browser type and pages requested) for security and performance. Fonts are loaded from Google Fonts, which may receive your IP address when fonts load.</p>
+<h2>Website analytics</h2>
+<p>We use Google Analytics 4 to understand website traffic and interactions, including pages viewed, referral sources, scrolling and device or browser information. Google Analytics uses cookies and pseudonymous identifiers to measure visits. We do not send generated or saved character names to Google Analytics. Google signals and advertising personalization are disabled in our analytics code.</p>
+<p>Learn more about how Google uses information from websites in <a href="https://policies.google.com/technologies/partner-sites">Google's partner-site privacy information</a>. You can manage cookies through your browser settings or use the <a href="https://tools.google.com/dlpage/gaoptout">Google Analytics opt-out browser add-on</a>.</p>
 <h2>Children</h2>
-<p>This site doesn't knowingly collect personal information from anyone, including children.</p>
+<p>This site does not ask visitors, including children, to provide names, email addresses or other contact details to use the generator.</p>
 <h2>Changes</h2>
 <p>If this policy changes, the date at the top of this page will be updated.</p>
 </div>`,
@@ -597,6 +601,17 @@ function layout(page, v) {
 <html lang="en">
 <head>
 <meta charset="utf-8">
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=${SITE.ga4MeasurementId}"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', '${SITE.ga4MeasurementId}', {
+    allow_google_signals: false,
+    allow_ad_personalization_signals: false
+  });
+</script>
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>${esc(page.title)}</title>
 <meta name="description" content="${esc(page.description)}">
