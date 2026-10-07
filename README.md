@@ -25,11 +25,25 @@ node serve.mjs     # preview at http://localhost:4321
 - `/aion-2-names-list/` – names list + server names + Empyrean Lords
 - `/about/`, `/privacy/`, `404.html`
 
-## Deploy (Cloudflare Pages / Netlify / Vercel)
+## Deploy (Cloudflare Pages)
 
+Cloudflare Pages project `aion2-name-generator` is connected to
+[`finalgod2003/aion2_name_generator`](https://github.com/finalgod2003/aion2_name_generator).
+Every push to `main` automatically builds and deploys the production site:
+https://aion2-name-generator.pages.dev. Other branches receive preview deployments.
+
+- Production branch: `main`
+- Framework preset: `None`
+- Root directory: repository root
 - Build command: `node build.mjs`
 - Output directory: `dist`
-- After going live, submit `https://aion2namegenerator.org/sitemap.xml` in Google Search Console.
+
+Push source changes to GitHub; Cloudflare rebuilds `dist/` during deployment.
+The previous direct-upload project, `aion2namegenerator`, is retained separately
+and does not receive these automatic deployments.
+
+After attaching `aion2namegenerator.org` as a custom domain, submit
+`https://aion2namegenerator.org/sitemap.xml` in Google Search Console.
 
 ## Updating
 
