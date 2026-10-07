@@ -50,6 +50,6 @@ Submit `https://www.aion2namegenerator.org/sitemap.xml` under the
 ## Updating
 
 - Analytics: GA4 property `Aion 2 Name Generator`, web stream `Aion 2 Name Generator — Web`, measurement ID `G-78SPRSKSMN`. The shared layout in `build.mjs` includes one Google tag per page, with Google signals and advertising personalization disabled. The privacy page describes analytics collection.
-
+- Plausible: the self-hosted [dashboard](https://stats.blackholeenglish.com/aion2namegenerator.org) uses the site's dedicated script, configured as `SITE.plausibleScriptUrl` in `build.mjs`. It is included once per page and initializes only on `www.aion2namegenerator.org`, excluding local development and `pages.dev` previews from Plausible statistics. The reporting timezone is `Asia/Taipei` (UTC+8). The privacy page describes both analytics services.
 - Server list: edit `EU_ELYOS`, `EU_ASMO`, `LAUNCH_NEW`, `LAUNCH_MORE` in `build.mjs`, and bump `SITE.updated`.
 - Static example names are seeded, so they stay stable between builds. Change a seed to reshuffle a list.

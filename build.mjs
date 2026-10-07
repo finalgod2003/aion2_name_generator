@@ -16,6 +16,7 @@ const SITE = {
   url: 'https://www.aion2namegenerator.org',
   name: 'Aion 2 Name Generator',
   ga4MeasurementId: 'G-78SPRSKSMN',
+  plausibleScriptUrl: 'https://stats.blackholeenglish.com/js/pa--mC4qqgntIU3F98__NNUn.js',
   updated: '2026-10-07',
   updatedHuman: 'October 7, 2026'
 };
@@ -539,6 +540,7 @@ pages.push({
 <h2>Website analytics</h2>
 <p>We use Google Analytics 4 to understand website traffic and interactions, including pages viewed, referral sources, scrolling and device or browser information. Google Analytics uses cookies and pseudonymous identifiers to measure visits. We do not send generated or saved character names to Google Analytics. Google signals and advertising personalization are disabled in our analytics code.</p>
 <p>Learn more about how Google uses information from websites in <a href="https://policies.google.com/technologies/partner-sites">Google's partner-site privacy information</a>. You can manage cookies through your browser settings or use the <a href="https://tools.google.com/dlpage/gaoptout">Google Analytics opt-out browser add-on</a>.</p>
+<p>We also use self-hosted Plausible Analytics at stats.blackholeenglish.com to measure page views, referral sources, browser and device information, approximate location, page engagement, outbound link clicks, file downloads and form submission events without analytics cookies. The analytics server receives technical request information, including your IP address, to process visits. Generated or saved character names and form field values are not included in these analytics events.</p>
 <h2>Children</h2>
 <p>This site does not ask visitors, including children, to provide names, email addresses or other contact details to use the generator.</p>
 <h2>Changes</h2>
@@ -611,6 +613,20 @@ function layout(page, v) {
     allow_google_signals: false,
     allow_ad_personalization_signals: false
   });
+</script>
+<!-- Self-hosted Plausible analytics -->
+<script async src="${SITE.plausibleScriptUrl}"></script>
+<script>
+  // Keep local development and deployment previews out of Plausible statistics.
+  if (window.location.hostname === '${new URL(SITE.url).hostname}') {
+    window.plausible = window.plausible || function() {
+      (window.plausible.q = window.plausible.q || []).push(arguments);
+    };
+    window.plausible.init = window.plausible.init || function(options) {
+      window.plausible.o = options || {};
+    };
+    window.plausible.init();
+  }
 </script>
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>${esc(page.title)}</title>

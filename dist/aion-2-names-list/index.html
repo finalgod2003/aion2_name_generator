@@ -13,6 +13,20 @@
     allow_ad_personalization_signals: false
   });
 </script>
+<!-- Self-hosted Plausible analytics -->
+<script async src="https://stats.blackholeenglish.com/js/pa--mC4qqgntIU3F98__NNUn.js"></script>
+<script>
+  // Keep local development and deployment previews out of Plausible statistics.
+  if (window.location.hostname === 'www.aion2namegenerator.org') {
+    window.plausible = window.plausible || function() {
+      (window.plausible.q = window.plausible.q || []).push(arguments);
+    };
+    window.plausible.init = window.plausible.init || function(options) {
+      window.plausible.o = options || {};
+    };
+    window.plausible.init();
+  }
+</script>
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Aion 2 Names List &amp; Server Names (2026) – 250+ Names</title>
 <meta name="description" content="Big list of Aion 2 names: Elyos and Asmodian male and female names, names for every class, cool and short names, plus the full Aion 2 server name list.">
