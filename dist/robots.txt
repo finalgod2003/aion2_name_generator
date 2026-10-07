@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://aion2namegenerator.org/sitemap.xml
+Sitemap: https://www.aion2namegenerator.org/sitemap.xml

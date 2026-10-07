@@ -13,7 +13,7 @@ const ROOT = path.dirname(fileURLToPath(import.meta.url));
 const SRC = path.join(ROOT, 'src');
 const DIST = path.join(ROOT, 'dist');
 const SITE = {
-  url: 'https://aion2namegenerator.org',
+  url: 'https://www.aion2namegenerator.org',
   name: 'Aion 2 Name Generator',
   updated: '2026-10-07',
   updatedHuman: 'October 7, 2026'

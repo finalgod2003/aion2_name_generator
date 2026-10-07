@@ -42,8 +42,10 @@ Push source changes to GitHub; Cloudflare rebuilds `dist/` during deployment.
 The previous direct-upload project, `aion2namegenerator`, is retained separately
 and does not receive these automatic deployments.
 
-After attaching `aion2namegenerator.org` as a custom domain, submit
-`https://aion2namegenerator.org/sitemap.xml` in Google Search Console.
+The production custom domain is `https://www.aion2namegenerator.org`.
+Canonical URLs, structured data, robots.txt, and the sitemap use this hostname.
+Submit `https://www.aion2namegenerator.org/sitemap.xml` under the
+`aion2namegenerator.org` domain property in Google Search Console.
 
 ## Updating
 
