@@ -23,6 +23,7 @@ node serve.mjs     # preview at http://localhost:4321
 - `/elyos-name-generator/`, `/asmodian-name-generator/`
 - `/gladiator-` `/templar-` `/assassin-` `/ranger-` `/sorcerer-` `/spiritmaster-` `/cleric-` `/chanter-name-generator/`
 - `/aion-2-names-list/` – names list + server names + Empyrean Lords
+- `/aion-2-server-transfer/` – server transfer guide (rules, server types by region, name tips)
 - `/about/`, `/privacy/`, `404.html`
 
 ## Deploy (Cloudflare Pages)
@@ -51,5 +52,6 @@ Submit `https://www.aion2namegenerator.org/sitemap.xml` under the
 
 - Analytics: GA4 property `Aion 2 Name Generator`, web stream `Aion 2 Name Generator — Web`, measurement ID `G-78SPRSKSMN`. The shared layout in `build.mjs` includes one Google tag per page, with Google signals and advertising personalization disabled. The privacy page describes analytics collection.
 - Plausible: the self-hosted [dashboard](https://stats.blackholeenglish.com/aion2namegenerator.org) uses the site's dedicated script, configured as `SITE.plausibleScriptUrl` in `build.mjs`. It is included once per page and initializes only on `www.aion2namegenerator.org`, excluding local development and `pages.dev` previews from Plausible statistics. The reporting timezone is `Asia/Taipei` (UTC+8). The privacy page describes both analytics services.
-- Server list: edit `EU_ELYOS`, `EU_ASMO`, `LAUNCH_NEW`, `LAUNCH_MORE` in `build.mjs`, and bump `SITE.updated`.
+- Server list: edit `SERVERS` (Elyos/Asmodian pairs per region, Advanced Access vs launch) and `SERVERS_CHECKED` in `build.mjs`, and bump `SITE.updated`. The names list and server transfer pages both read from it.
+- Server transfer rules: edit the `/aion-2-server-transfer/` page and `TRANSFER` in `build.mjs` when NCSOFT publishes new details.
 - Static example names are seeded, so they stay stable between builds. Change a seed to reshuffle a list.

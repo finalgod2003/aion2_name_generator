@@ -86,11 +86,17 @@ function classCards(exclude) {
     .map((k) => `<a class="card" href="${classUrl(k)}"><span class="tag">${NG.CLASSES[k].role}</span><strong>${NG.CLASSES[k].label} Name Generator</strong><span>${esc(CLASS_COPY[k].card)}</span></a>`)
     .join('')}</div>`;
 }
-const factionCards = `<div class="cards">
-<a class="card elyos" href="/elyos-name-generator/"><span class="tag">Light · Elysea</span><strong>Elyos Name Generator</strong><span>Bright, flowing names with angelic -iel and -ael endings.</span></a>
-<a class="card asmodian" href="/asmodian-name-generator/"><span class="tag">Shadow · Asmodae</span><strong>Asmodian Name Generator</strong><span>Sharp, dark names built on hard Z, K and TH sounds.</span></a>
-<a class="card" href="/aion-2-names-list/"><span class="tag">Lists · Servers</span><strong>Aion 2 Names List</strong><span>Hundreds of ready-made names plus every Aion 2 server name.</span></a>
+const HUB_CARDS = [
+  ['/elyos-name-generator/', 'elyos', 'Light · Elysea', 'Elyos Name Generator', 'Bright, flowing names with angelic -iel and -ael endings.'],
+  ['/asmodian-name-generator/', 'asmodian', 'Shadow · Asmodae', 'Asmodian Name Generator', 'Sharp, dark names built on hard Z, K and TH sounds.'],
+  ['/aion-2-names-list/', '', 'Lists · Servers', 'Aion 2 Names List', 'Hundreds of ready-made names plus every Aion 2 server name.'],
+  ['/aion-2-server-transfer/', '', 'Opens Oct 14', 'Aion 2 Server Transfer', 'Moving servers? Rules, free transfers and how to keep your name.']
+];
+function factionCards(exclude) {
+  return `<div class="cards">
+${HUB_CARDS.filter(([href]) => href !== exclude).map(([href, cls, tag, title, text]) => `<a class="card${cls ? ' ' + cls : ''}" href="${href}"><span class="tag">${tag}</span><strong>${title}</strong><span>${esc(text)}</span></a>`).join('\n')}
 </div>`;
+}
 
 // ---------------------------------------------------------------- class copy
 const CLASS_COPY = {
@@ -203,7 +209,7 @@ ${variantTool}
 <h2>Pick a faction-specific generator</h2>
 <p>Elyos and Asmodians don't just fight each other, they sound different too. Each faction page tunes the syllables to its side of Atreia.</p>
 </div>
-${factionCards}
+${factionCards()}
 <div class="content">
 <h2>Aion 2 name generators by class</h2>
 <p>Every class page uses the same engine but adds class-flavored roots and themed words, so a Templar gets names like <em>Aldric</em> or <em>Dawnward</em> while an Assassin gets <em>Nyrix</em> or <em>Duskfang</em>.</p>
@@ -386,10 +392,48 @@ ${classCards(k)}
 });
 
 // Names list + servers
-const EU_ELYOS = ['Siel', 'Nezekan', 'Vaizel', 'Kaisinel', 'Ariel', 'Meslamtaeda', 'Fregion', 'Hithanya', 'Marchutan'];
-const EU_ASMO = ['Israphel', 'Zikel', 'Triniel', 'Lumiel', 'Azphel', 'Beritra', 'Ereshkigal', 'Nemon', 'Yustiel'];
-const LAUNCH_NEW = ['Lamuatan', 'Atiel', 'Gauss', 'Agnita', 'Ishtar', 'Fafnir', 'Tiamat', 'Indnath'];
-const LAUNCH_MORE = ['Nania', 'Hadala', 'Tahavatha', 'Ludra', 'Luteros', 'Ulgorn', 'Phernos', 'Munin', 'Daminu', 'Odar', 'Kasaka', 'Zemurru', 'Bakarma', 'Kromede', 'Tsenka', 'Quai', 'Kochi', 'Baba'];
+// Official pairings from NCSOFT's "New Server and Matchmaking Information" notice (Oct 4, 2026).
+// Each entry is [Elyos server, Asmodian server]. aa = Advanced Access servers, launch = commercial launch servers.
+const SERVERS = {
+  Europe: {
+    aa: [['Siel', 'Israphel'], ['Nezekan', 'Zikel'], ['Vaizel', 'Triniel'], ['Kaisinel', 'Lumiel'], ['Yustiel', 'Marchutan'], ['Ariel', 'Azphel'], ['Fregion', 'Ereshkigal'], ['Meslamtaeda', 'Beritra'], ['Hithanya', 'Nemon']],
+    launch: [['Nania', 'Hadala'], ['Tahavatha', 'Ludra'], ['Luteros', 'Ulgorn'], ['Phernos', 'Munin'], ['Daminu', 'Odar'], ['Kasaka', 'Zemurru'], ['Bakarma', 'Kromede'], ['Tsenka', 'Quai'], ['Kochi', 'Baba'], ['Ishtar', 'Fafnir'], ['Tiamat', 'Indnath'], ['Gauss', 'Agnita'], ['Lamuatan', 'Atiel']]
+  },
+  'NA East': {
+    aa: [['Siel', 'Israphel'], ['Nezekan', 'Zikel'], ['Vaizel', 'Triniel']],
+    launch: [['Kaisinel', 'Lumiel'], ['Yustiel', 'Marchutan'], ['Ariel', 'Azphel'], ['Fregion', 'Ereshkigal'], ['Meslamtaeda', 'Beritra']]
+  },
+  'NA West': {
+    aa: [['Siel', 'Israphel'], ['Nezekan', 'Zikel']],
+    launch: [['Vaizel', 'Triniel'], ['Kaisinel', 'Lumiel'], ['Yustiel', 'Marchutan']]
+  },
+  'Latin America': {
+    aa: [['Siel', 'Israphel'], ['Nezekan', 'Zikel']],
+    launch: [['Vaizel', 'Triniel'], ['Kaisinel', 'Lumiel'], ['Yustiel', 'Marchutan'], ['Ariel', 'Azphel']]
+  },
+  Asia: {
+    aa: [['Siel', 'Israphel'], ['Nezekan', 'Zikel'], ['Vaizel', 'Triniel']],
+    launch: [['Kaisinel', 'Lumiel'], ['Yustiel', 'Marchutan'], ['Ariel', 'Azphel'], ['Fregion', 'Ereshkigal'], ['Meslamtaeda', 'Beritra'], ['Hitani', 'Nemon']]
+  }
+};
+const SERVERS_CHECKED = 'October 4, 2026';
+const pairList = (pairs, side) => pairs.map((p) => p[side]).join(', ');
+// Full Elyos / Asmodian / pairing table for one region
+function serverTable(region) {
+  const R = SERVERS[region];
+  const rows = (pairs, type) => pairs.map(([e, a]) => `<tr><td>${type}</td><td class="elyos">${e}</td><td class="asmo">${a}</td></tr>`).join('');
+  return `<div class="table-wrap"><table>
+<thead><tr><th>Server type</th><th>Elyos server</th><th>Asmodian server</th></tr></thead>
+<tbody>${rows(R.aa, 'Advanced Access')}${rows(R.launch, 'Launch')}</tbody>
+</table></div>`;
+}
+// Compact table: one row per region and server type
+function regionSummaryTable(regions) {
+  return `<div class="table-wrap"><table>
+<thead><tr><th>Region</th><th>Type</th><th>Elyos servers</th><th>Asmodian servers</th></tr></thead>
+<tbody>${regions.map((r) => ['aa', 'launch'].map((t) => `<tr><th scope="row">${r}</th><td>${t === 'aa' ? 'Advanced Access' : 'Launch'}</td><td class="elyos">${pairList(SERVERS[r][t], 0)}</td><td class="asmo">${pairList(SERVERS[r][t], 1)}</td></tr>`).join('')).join('')}</tbody>
+</table></div>`;
+}
 const LORDS = [
   ['Ariel', 'Elyos', 'Lady of Light; leader of the Elyos lords'],
   ['Kaisinel', 'Elyos', 'Lord of Illusion'],
@@ -470,21 +514,19 @@ ${favoritesPanel}
 <h2 id="servers">Aion 2 server names</h2>
 <p>Aion 2 servers are split by faction: you create an Elyos character on an Elyos server or an Asmodian character on an Asmodian server. Servers are linked so you can still meet the other faction through rifts and in the Abyss. Because <strong>character names only need to be unique on your own server</strong>, a name that's taken on one server may still be free on another.</p>
 
-<h3>European servers by faction</h3>
-<div class="table-wrap"><table>
-<thead><tr><th>Elyos servers</th><th>Asmodian servers</th></tr></thead>
-<tbody>${EU_ELYOS.map((e, i) => `<tr><td class="elyos">${e}</td><td class="asmo">${EU_ASMO[i] || ''}</td></tr>`).join('')}</tbody>
-</table></div>
+<h3>European servers</h3>
+<p>Each row is an Elyos server and the Asmodian server it's paired with for the Abyss and other cross-faction modes. <strong>Advanced Access</strong> servers opened first, in the early-access period before launch; <strong>Launch</strong> servers opened for the free-to-play launch on October 5, 2026. Newer worlds are a great chance to claim a short or popular name before anyone else does.</p>
+${serverTable('Europe')}
 
-<h3>Servers added for the free-to-play launch</h3>
-<p>The following servers were announced for the free-to-play launch on October 5, 2026. New worlds are a great chance to claim a short or popular name before anyone else does.</p>
-<div class="table-wrap"><table>
-<thead><tr><th>Status</th><th>Servers</th></tr></thead>
-<tbody>
-<tr><th scope="row">New</th><td>${LAUNCH_NEW.join(', ')}</td></tr>
-<tr><th scope="row">Also listed</th><td>${LAUNCH_MORE.join(', ')}</td></tr>
-</tbody></table></div>
-<p class="note">Server lists change with new launches, merges and regional openings. This list was last checked on ${SITE.updatedHuman} against public launch coverage. Your in-game server selection screen is always the final word.</p>
+<h3>North America, Latin America and Asia servers</h3>
+${regionSummaryTable(['NA East', 'NA West', 'Latin America', 'Asia'])}
+<p class="note">Server lists and pairings change with new launches, merges and rebalancing. This list follows NCSOFT's official server and matchmaking notice as of ${SERVERS_CHECKED}. Your in-game server selection screen is always the final word.</p>
+</div>
+<div class="cards">
+<a class="card" href="/aion-2-server-transfer/"><span class="tag">Opens Oct 14</span><strong>Aion 2 Server Transfer Guide</strong><span>Moving servers? Rules, free transfers and how to keep your character name.</span></a>
+<a class="card" href="/"><span class="tag">Generator</span><strong>Aion 2 Name Generator</strong><span>Your name is taken on the new server? Generate fresh ideas in one click.</span></a>
+</div>
+<div class="content">
 
 <h3>Where do Aion 2 server names come from?</h3>
 <p>Most server names come straight from Aion lore: the twelve <strong>Empyrean Lords</strong> (Siel, Israphel, Ariel, Azphel and the rest), the <strong>Balaur Dragon Lords</strong> (Beritra, Ereshkigal, Meslamtaeda, Fregion, Tiamat) and other mythic figures. They're great inspiration for your own name, though you'll need your own twist since the originals are always taken.</p>
@@ -498,9 +540,115 @@ ${favoritesPanel}
 </div>`,
   faq: [
     { q: 'Are Aion 2 character names unique per server?', a: 'Yes. A name only has to be free on the server you\'re creating your character on, so a name taken on Siel might still be available on another server.' },
-    { q: 'What are the Aion 2 server names?', a: `In Europe, Elyos servers include ${EU_ELYOS.slice(0, 6).join(', ')} and more, while Asmodian servers include ${EU_ASMO.slice(0, 6).join(', ')} and more. See the full table above, last checked ${SITE.updatedHuman}.` },
+    { q: 'What are the Aion 2 server names?', a: `In Europe, Elyos servers include ${SERVERS.Europe.aa.slice(0, 6).map((p) => p[0]).join(', ')} and more, while Asmodian servers include ${SERVERS.Europe.aa.slice(0, 6).map((p) => p[1]).join(', ')} and more. See the full tables above, based on NCSOFT's server notice as of ${SERVERS_CHECKED}.` },
+    { q: 'Can I transfer my character to another Aion 2 server?', a: 'Yes. NCSOFT says global server transfers open on October 14, 2026, within the same faction, and are initially free. Advanced Access characters can only move between Advanced Access servers. See the <a href="/aion-2-server-transfer/">Aion 2 server transfer guide</a>.' },
     { q: 'Why are Aion 2 servers named Siel, Israphel, Ariel and Azphel?', a: 'They\'re named after the Empyrean Lords and other figures from Aion lore. Siel (Lady of Time) and Israphel (Lord of Space) held the Aetheric Field, Ariel leads the Elyos lords and Azphel leads the Asmodian lords.' },
     { q: 'My favorite name is taken. What now?', a: 'Use the variant maker above. It keeps the sound but changes the spelling (Ariel → Aryel, Ariell, Arielle). Or try the same name on a newer server.' }
+  ],
+  schema: 'article',
+  priority: '0.9'
+});
+
+// Server transfer guide
+// Global rules: NCSOFT "Information on server transfer" (Sep 30, 2026). Korean precedent: Inven Global livestream summary (Jul 21, 2026).
+const TRANSFER = { opens: 'October 14, 2026', announced: 'September 30, 2026' };
+pages.push({
+  path: '/aion-2-server-transfer/',
+  title: 'Aion 2 Server Transfer Guide (Oct 14) – Rules & Free Transfers',
+  description: 'Aion 2 server transfers open October 14, 2026: same faction only, free at first, Advanced Access limits, every server by region and how to keep your name.',
+  h1: 'Aion 2 Server Transfer Guide',
+  eyebrow: `Opens ${TRANSFER.opens} · Updated ${SITE.updatedHuman}`,
+  lead: 'Everything confirmed so far about moving your Daeva to another Aion 2 server: the date, who can move where, what it costs, and how to make sure you still have a name you like on the other side.',
+  app: true,
+  crumbs: [['Aion 2 Server Transfer']],
+  body: () => `<div class="content">
+<ul class="toc">
+<li><a href="#quick-facts">Quick facts</a></li>
+<li><a href="#who-can-transfer">Who can move where</a></li>
+<li><a href="#character-names">Your character name</a></li>
+<li><a href="#checklist">Prep checklist</a></li>
+<li><a href="#korean-transfers">Korean version</a></li>
+<li><a href="#unconfirmed">Still unconfirmed</a></li>
+<li><a href="#faq">FAQ</a></li>
+</ul>
+
+<h2 id="quick-facts">Aion 2 server transfer: quick facts</h2>
+<div class="table-wrap"><table><tbody>
+<tr><th scope="row">Start date</th><td><strong>${TRANSFER.opens}</strong> (global service: Europe, North America, Latin America, Asia)</td></tr>
+<tr><th scope="row">Cost</th><td>Free at first. NCSOFT hasn't said how long the free period lasts.</td></tr>
+<tr><th scope="row">Faction</th><td>Same faction only: Elyos to Elyos, Asmodian to Asmodian</td></tr>
+<tr><th scope="row">Advanced Access servers</th><td>Can only transfer to other Advanced Access servers, not to launch servers</td></tr>
+<tr><th scope="row">Playing with friends</th><td>All instanced content, including dungeons, is already cross-server</td></tr>
+<tr><th scope="row">Source</th><td>NCSOFT notice "Information on server transfer", ${TRANSFER.announced}</td></tr>
+</tbody></table></div>
+<p>NCSOFT announced transfers to ease the launch queues: if your preferred server is full, you can start on a recommended server today and move later. Because dungeons are cross-server, you won't be cut off from friends in the meantime.</p>
+
+<h2 id="who-can-transfer">Who can move where</h2>
+<p>Aion 2 has two kinds of servers in every region. <strong>Advanced Access</strong> servers opened first, in the early-access period before launch, and <strong>launch</strong> servers opened for the free-to-play release on October 5, 2026. NCSOFT has said Advanced Access characters can only move between Advanced Access servers. Each server also houses only one faction, so a transfer never changes your side of the war.</p>
+<p>Your Abyss opponents come from the opposing server your new home is paired with, so moving servers also changes who you'll fight. Pairings are rebalanced from time to time.</p>
+${regionSummaryTable(Object.keys(SERVERS))}
+<p class="note">Based on NCSOFT's server and matchmaking notice as of ${SERVERS_CHECKED}. Transfers between regions haven't been mentioned, so plan on staying in your current region. See the <a href="/aion-2-names-list/#servers">full server list with pairings</a>.</p>
+
+<h2 id="character-names">Will you keep your character name?</h2>
+<p>Character names only have to be unique on a single server, so the name you have now may already belong to someone on your destination server. NCSOFT hasn't explained how the global service handles that yet.</p>
+<p>The Korean version gives a hint: during its July 2026 transfer window, <strong>transferred characters were given a temporary name and had to pick a new one on first login</strong>. If the global service works the same way, you'll want a few names ready before you move, especially if your current name is short or popular.</p>
+<ul>
+<li><strong>Prepare three to five backups.</strong> Save them with ☆ below so they're one click away.</li>
+<li><strong>Keep the sound, change the spelling.</strong> If your name is taken, try a variant: Ariel → Aryel, Ariell or Arielle.</li>
+<li><strong>Newer servers have more free names.</strong> Launch servers opened later than Advanced Access servers, so short names are easier to find there.</li>
+</ul>
+</div>
+${variantTool}
+${generatorWidget({ seed: 31 })}
+${favoritesPanel}
+<div class="content">
+
+<h2 id="checklist">How to get ready for October 14</h2>
+<ol>
+<li><strong>Check your server type.</strong> Find your server in the table above to see whether it's an Advanced Access or launch server. That decides where you can go.</li>
+<li><strong>Pick a destination on the same faction.</strong> Look at population and queue times, and ask your friends or Legion where they're heading.</li>
+<li><strong>Talk to your Legion.</strong> Legion transfers haven't been announced. In the Korean version, players were told to leave their Legion before transferring.</li>
+<li><strong>Wrap up trades.</strong> Each server runs its own Market, so finish or cancel active listings to be safe.</li>
+<li><strong>Have backup names ready.</strong> Use the <a href="/">Aion 2 name generator</a> or the variant maker above and save your shortlist.</li>
+<li><strong>Read the final notice.</strong> Check the official notice on October 14 for cost, limits and the transfer schedule before you confirm.</li>
+</ol>
+
+<h2 id="korean-transfers">How server transfers worked in the Korean version</h2>
+<p>The Korean service ran a transfer window from July 22 to 28, 2026. These rules come from NCSOFT's Korean livestream on July 21, 2026, as summarized by Inven Global. <strong>The global service may work differently</strong>, but it's the best preview available.</p>
+<div class="table-wrap"><table><tbody>
+<tr><th scope="row">How often</th><td>Once per account</td></tr>
+<tr><th scope="row">Cost</th><td>Paid: 1,000 Quna plus 200 Quna per character (one character = 1,200 Quna)</td></tr>
+<tr><th scope="row">Schedule</th><td>Opened daily at 20:00; each transfer took from a few minutes to about 30 minutes</td></tr>
+<tr><th scope="row">Capacity</th><td>Limited transfer slots per server, fewer on busy servers. Full servers couldn't be entered.</td></tr>
+<tr><th scope="row">Character name</th><td>Replaced with a temporary name; a new name had to be set on first login</td></tr>
+<tr><th scope="row">Moved with you</th><td>Inventory, storage items, Kinah, friend and block lists</td></tr>
+<tr><th scope="row">Not moved</th><td>Account storage</td></tr>
+<tr><th scope="row">Legion</th><td>Players were advised to leave their Legion first</td></tr>
+<tr><th scope="row">Destination limit</th><td>Up to 9 characters per server</td></tr>
+</tbody></table></div>
+<p>The global service starts out free, so the cost above already differs. Treat the rest as a guide, not a promise.</p>
+
+<h2 id="unconfirmed">Still unconfirmed for the global service</h2>
+<ul>
+<li>How long transfers stay free, and what they'll cost afterwards</li>
+<li>How often you can transfer, and whether there's a cooldown</li>
+<li>Whether launch server characters can move between launch servers, and whether transfers between regions are possible</li>
+<li>What happens to your character name, Legion membership and Market listings</li>
+<li>Whether busy servers will cap incoming transfers</li>
+</ul>
+<p>We'll update this page when NCSOFT publishes the full rules.</p>
+
+<h2>Transfer or start fresh?</h2>
+<p>If your main is already well geared, waiting for a transfer is usually the better deal, especially while it's free. If you're still early in the leveling curve, a new character on your target server might be just as fast and lets you claim a fresh name immediately. Either way, dungeons are cross-server, so you can group with friends on any server in the meantime.</p>
+</div>
+${factionCards('/aion-2-server-transfer/')}`,
+  faq: [
+    { q: 'When do Aion 2 server transfers start?', a: `Server transfers for the global version of Aion 2 open on ${TRANSFER.opens}, as announced by NCSOFT on ${TRANSFER.announced}.` },
+    { q: 'Are Aion 2 server transfers free?', a: 'Yes, at first. NCSOFT says transfers will initially be free but hasn\'t said how long the free period lasts or what transfers will cost afterwards.' },
+    { q: 'Can I transfer from Elyos to Asmodian?', a: 'No. Transfers only move characters between servers of the same faction. Each Aion 2 server houses a single faction, so playing the other side means creating a new character on one of its servers.' },
+    { q: 'Can I move from an Advanced Access server to a launch server?', a: 'No. NCSOFT has said Advanced Access characters can only transfer between Advanced Access servers, not to the commercial launch servers.' },
+    { q: 'Will I keep my character name after a server transfer?', a: 'Not guaranteed. Names are unique per server, and NCSOFT hasn\'t confirmed how name conflicts are handled globally. In the Korean version, transferred characters got a temporary name and picked a new one at first login, so keep a few backup names ready. The <a href="/">Aion 2 name generator</a> can help.' },
+    { q: 'Can I play with friends on another server without transferring?', a: 'Yes. All instanced content, including dungeons, is cross-server, so you can group with friends on other servers before or instead of transferring.' }
   ],
   schema: 'article',
   priority: '0.9'
@@ -555,7 +703,8 @@ const NAV = [
   ['/elyos-name-generator/', 'Elyos'],
   ['/asmodian-name-generator/', 'Asmodian'],
   ['/templar-name-generator/', 'Classes'],
-  ['/aion-2-names-list/', 'Names List & Servers']
+  ['/aion-2-names-list/', 'Names List & Servers'],
+  ['/aion-2-server-transfer/', 'Server Transfer']
 ];
 
 function jsonLd(page) {
@@ -667,7 +816,7 @@ ${page.faq ? `<div class="content">${faqHtml(page.faq)}</div>` : ''}
 <footer class="site-footer"><div class="wrap">
 <div class="foot-grid">
 <div><h4>Aion 2 Name Generator</h4><p>Free, unofficial name generator for Aion 2 players. Elyos &amp; Asmodian names for every class.</p></div>
-<div><h4>Factions</h4><ul><li><a href="/">Aion 2 Name Generator</a></li><li><a href="/elyos-name-generator/">Elyos Names</a></li><li><a href="/asmodian-name-generator/">Asmodian Names</a></li><li><a href="/aion-2-names-list/">Names List &amp; Servers</a></li></ul></div>
+<div><h4>Factions</h4><ul><li><a href="/">Aion 2 Name Generator</a></li><li><a href="/elyos-name-generator/">Elyos Names</a></li><li><a href="/asmodian-name-generator/">Asmodian Names</a></li><li><a href="/aion-2-names-list/">Names List &amp; Servers</a></li><li><a href="/aion-2-server-transfer/">Server Transfer</a></li></ul></div>
 <div><h4>Classes</h4><ul>${CLASS_KEYS.slice(0, 4).map((k) => `<li><a href="${classUrl(k)}">${NG.CLASSES[k].label} Names</a></li>`).join('')}</ul></div>
 <div><h4>&nbsp;</h4><ul>${CLASS_KEYS.slice(4).map((k) => `<li><a href="${classUrl(k)}">${NG.CLASSES[k].label} Names</a></li>`).join('')}</ul></div>
 </div>
