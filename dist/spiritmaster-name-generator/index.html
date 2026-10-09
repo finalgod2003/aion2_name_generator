@@ -43,7 +43,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700&family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="/assets/style.css?v=77da9e50">
+<link rel="stylesheet" href="/assets/style.css?v=bc95ac1a">
 <script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"WebApplication","name":"Aion 2 Spiritmaster Name Generator","url":"https://www.aion2namegenerator.org/spiritmaster-name-generator/","applicationCategory":"GameApplication","operatingSystem":"Any","browserRequirements":"Requires JavaScript","description":"Free Aion 2 Spiritmaster name generator. Ethereal names for summoners who command spirits. Male & female names for Elyos and Asmodian, copied in one click.","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"}},{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Aion 2 Name Generator","item":"https://www.aion2namegenerator.org/"},{"@type":"ListItem","position":2,"name":"Spiritmaster Name Generator","item":"https://www.aion2namegenerator.org/spiritmaster-name-generator/"}]},{"@type":"FAQPage","mainEntity":[{"@type":"Question","name":"What is a good Spiritmaster name?","acceptedAnswer":{"@type":"Answer","text":"Ethereal names such as Oriyn, Ethora, Selaen or Gloomcaller suit the summoner fantasy. Use the generator with class set to Spiritmaster for more."}},{"@type":"Question","name":"What does the Spiritmaster do in Aion 2?","acceptedAnswer":{"@type":"Answer","text":"It is a summoner and controller class that commands spirits to pressure enemies and provide crowd control and utility."}},{"@type":"Question","name":"How do I use the Spiritmaster name generator?","acceptedAnswer":{"@type":"Answer","text":"The class is already set to Spiritmaster. Choose Elyos or Asmodian, pick a gender and tone, then hit Generate. Click any name to copy it, or ☆ to save it to your shortlist."}}]}]}</script>
 </head>
 <body>
@@ -68,11 +68,24 @@
 <label class="field"><span>Class</span><select name="cls"><option value="any">Any class</option><option value="gladiator">Gladiator</option><option value="templar">Templar</option><option value="assassin">Assassin</option><option value="ranger">Ranger</option><option value="sorcerer">Sorcerer</option><option value="spiritmaster" selected>Spiritmaster</option><option value="cleric">Cleric</option><option value="chanter">Chanter</option></select></label>
 <label class="field"><span>Tone</span><select name="style"><option value="any">Mixed</option><option value="fantasy">Fantasy</option><option value="lore">Lore-inspired</option><option value="compound">Epic compound</option><option value="short">Short & clean</option></select></label>
 <label class="field"><span>Starts with</span><input type="text" name="startsWith" maxlength="3" placeholder="Any letter, e.g. K" autocomplete="off" spellcheck="false"></label>
-<label class="field"><span>Max length: <b class="len-out">12</b></span><input type="range" name="maxLen" min="4" max="16" value="12"></label>
+<label class="field"><span>Max length: <b class="len-out">12</b></span><input type="range" name="maxLen" min="4" max="16" value="12" aria-describedby="length-note"></label>
 </div>
+<p class="hint length-note" id="length-note">Length is a tool preference, not a verified game limit. See the regional rules below.</p>
 <div class="gen-actions"><button class="btn" type="submit">Generate Names</button><button type="button" class="btn btn-ghost btn-sm copy-all">Copy all</button><p class="hint">Click a name to copy · ☆ save · ↻ spelling variants if it's taken</p></div>
 </form>
-<ul class="results" aria-live="polite"><li class="name-card" data-faction="elyos"><span class="name-text">Seas</span><span class="name-meta">Elyos · Male · Spiritmaster</span></li><li class="name-card" data-faction="asmodian"><span class="name-text">Lumrok</span><span class="name-meta">Asmodian · Male · Spiritmaster</span></li><li class="name-card" data-faction="elyos"><span class="name-text">Orine</span><span class="name-meta">Elyos · Female · Spiritmaster</span></li><li class="name-card" data-faction="asmodian"><span class="name-text">Selar</span><span class="name-meta">Asmodian · Male · Spiritmaster</span></li><li class="name-card" data-faction="elyos"><span class="name-text">Elyella</span><span class="name-meta">Elyos · Female · Spiritmaster</span></li><li class="name-card" data-faction="elyos"><span class="name-text">Galis</span><span class="name-meta">Elyos · Female · Spiritmaster</span></li><li class="name-card" data-faction="elyos"><span class="name-text">Sieliel</span><span class="name-meta">Elyos · Female · Spiritmaster</span></li><li class="name-card" data-faction="asmodian"><span class="name-text">Umbrok</span><span class="name-meta">Asmodian · Male · Spiritmaster</span></li><li class="name-card" data-faction="elyos"><span class="name-text">Faethea</span><span class="name-meta">Elyos · Female · Spiritmaster</span></li><li class="name-card" data-faction="elyos"><span class="name-text">Tereon</span><span class="name-meta">Elyos · Male · Spiritmaster</span></li></ul>
+<details class="naming-rules" id="naming-rules">
+<summary>Name length &amp; regional rules <span>Global · KR · TW</span></summary>
+<p><strong>12 is this tool's default length preference.</strong> The slider lets you choose a maximum of 4–16 letters; generated names use A–Z only and have at least 3 letters. These are generator settings, not a guarantee that a name meets your region's game rules.</p>
+<div class="table-wrap"><table>
+<thead><tr><th scope="col">Region</th><th scope="col">What is verified</th></tr></thead>
+<tbody>
+<tr><th scope="row">Global</th><td><strong>Current limits unverified by this site.</strong> Check the current character-creation screen for length, allowed characters and name availability. We do not apply the Korean reservation rules to Global.</td></tr>
+<tr><th scope="row">Korea (KR)</th><td><strong>Historical reservation rules, October 16, 2025:</strong> 1–12 characters using Korean, English or digits; names were unique within a server. This is not confirmation of today's live-service rules. <a href="https://about.ncsoft.com/en/news/article/aion2_update_251016">NCSOFT announcement</a>.</td></tr>
+<tr><th scope="row">Taiwan (TW)</th><td><strong>Current limits unverified by this site.</strong> The <a href="https://about.ncsoft.com/tw/news/article/aion2_update_251016_2">Taiwan announcement of October 16, 2025</a> directs players to local event rules without specifying a length limit. We do not assume the Korean limit applies.</td></tr>
+</tbody></table></div>
+<p class="hint">Sources reviewed October 9, 2026. The generator filters exact matches to a curated list of well-known Aion characters for originality; this is not an official reserved-name list. Availability and acceptance must be checked in game.</p>
+</details>
+<ul class="results" aria-live="polite"><li class="name-card" data-faction="elyos"><span class="name-text">Lightbond</span><span class="name-meta">Elyos · Male · Spiritmaster</span></li><li class="name-card" data-faction="asmodian"><span class="name-text">Tegoth</span><span class="name-meta">Asmodian · Male · Spiritmaster</span></li><li class="name-card" data-faction="asmodian"><span class="name-text">Malael</span><span class="name-meta">Asmodian · Female · Spiritmaster</span></li><li class="name-card" data-faction="elyos"><span class="name-text">Terira</span><span class="name-meta">Elyos · Female · Spiritmaster</span></li><li class="name-card" data-faction="elyos"><span class="name-text">Yusis</span><span class="name-meta">Elyos · Male · Spiritmaster</span></li><li class="name-card" data-faction="asmodian"><span class="name-text">Teshaith</span><span class="name-meta">Asmodian · Female · Spiritmaster</span></li><li class="name-card" data-faction="asmodian"><span class="name-text">Zaeth</span><span class="name-meta">Asmodian · Female · Spiritmaster</span></li><li class="name-card" data-faction="asmodian"><span class="name-text">Hollowcaller</span><span class="name-meta">Asmodian · Female · Spiritmaster</span></li><li class="name-card" data-faction="elyos"><span class="name-text">Ethena</span><span class="name-meta">Elyos · Female · Spiritmaster</span></li><li class="name-card" data-faction="elyos"><span class="name-text">Nyara</span><span class="name-meta">Elyos · Female · Spiritmaster</span></li></ul>
 </section>
 <section class="panel favorites" aria-label="Saved names">
 <div class="panel-head"><h3>★ Your saved names</h3><button type="button" class="btn btn-ghost btn-sm fav-clear" hidden>Clear</button></div>
@@ -88,18 +101,18 @@
 
 <div class="cols">
 <div><h2>Elyos Spiritmaster names</h2>
-<ul class="name-list"><li>Faemawyn</li><li>Tidion</li><li>Skysoul</li><li>Kaisis</li><li>Dawnsoul</li><li>Sesine</li><li>Elyel</li><li>Aena</li><li>Tean</li><li>Selira</li><li>Oriel</li><li>Aecena</li></ul></div>
+<ul class="name-list"><li>Selryra</li><li>Kaismaena</li><li>Gias</li><li>Isneth</li><li>Terel</li><li>Nyra</li><li>Sieleth</li><li>Haras</li><li>Maras</li><li>Ranae</li><li>Galielle</li><li>Silverspirit</li></ul></div>
 <div><h2>Asmodian Spiritmaster names</h2>
-<ul class="name-list"><li>Rays</li><li>Ethys</li><li>Oriluyx</li><li>Kharoyn</li><li>Belusyne</li><li>Ishaesh</li><li>Zyvaix</li><li>Khaus</li><li>Zaneix</li><li>Xaroth</li><li>Malthais</li><li>Durax</li></ul></div>
+<ul class="name-list"><li>Lilkyx</li><li>Altaix</li><li>Durax</li><li>Viel</li><li>Vaeth</li><li>Torax</li><li>Gorgar</li><li>Bonerune</li><li>Hollowpact</li><li>Selara</li><li>Lumia</li><li>Xieth</li></ul></div>
 </div>
 <div class="cols">
 <div><h3>Male Spiritmaster names</h3>
-<ul class="name-list"><li>Maneoth</li><li>Teora</li><li>Nyak</li><li>Selel</li><li>Aurceora</li><li>Eryn</li><li>Seneel</li><li>Luloras</li><li>Aeleel</li><li>Nyoth</li></ul></div>
+<ul class="name-list"><li>Manoth</li><li>Tilion</li><li>Drael</li><li>Vorkok</li><li>Terez</li><li>Teis</li><li>Nydok</li><li>Selras</li><li>Darion</li><li>Galkaez</li></ul></div>
 <div><h3>Female Spiritmaster names</h3>
-<ul class="name-list"><li>Tenaeth</li><li>Galrith</li><li>Aeneyra</li><li>Shakayne</li><li>Teine</li><li>Maliss</li><li>Oria</li><li>Raix</li><li>Elylawyn</li><li>Celnaella</li></ul></div>
+<ul class="name-list"><li>Tenaeth</li><li>Raix</li><li>Fayra</li><li>Ishyne</li><li>Aethael</li><li>Ariwyn</li><li>Iliel</li><li>Ilys</li><li>Caewyn</li><li>Lyzeka</li></ul></div>
 </div>
 <h3>Epic Spiritmaster names</h3>
-<ul class="name-list"><li>Whitetide</li><li>Pureether</li><li>Shadowbind</li><li>Ravenwisp</li><li>Sunbond</li><li>Lumentide</li><li>Voidsoul</li><li>Moonrune</li><li>Solarbond</li><li>Starcaller</li><li>Bloodstone</li><li>Crimsontide</li><li>Skysoul</li><li>Glorywisp</li></ul>
+<ul class="name-list"><li>Whitetide</li><li>Doomspirit</li><li>Blackpact</li><li>Starpact</li><li>Shadowpact</li><li>Goldbind</li><li>Duskgale</li><li>Crimsonrune</li><li>Sacredstone</li><li>Blackgale</li><li>Dreadcaller</li><li>Skybond</li><li>Holybind</li><li>Hollowtide</li></ul>
 
 <h2>Other Aion 2 class name generators</h2>
 </div>
@@ -116,7 +129,7 @@
 </div>
 <p class="legal">© 2026 aion2namegenerator.org · <a href="/about/">About</a> · <a href="/privacy/">Privacy</a><br>Unofficial fan site, not affiliated with NCSOFT. AION is a trademark of NCSOFT Corporation.</p>
 </div></footer>
-<script src="/assets/namegen.js?v=80952943" defer></script>
-<script src="/assets/app.js?v=fee9bfed" defer></script>
+<script src="/assets/namegen.js?v=646c7ea1" defer></script>
+<script src="/assets/app.js?v=251dbc6b" defer></script>
 </body>
 </html>

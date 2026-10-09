@@ -43,7 +43,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700&family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="/assets/style.css?v=77da9e50">
+<link rel="stylesheet" href="/assets/style.css?v=bc95ac1a">
 <script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"WebApplication","name":"Aion 2 Gladiator Name Generator","url":"https://www.aion2namegenerator.org/gladiator-name-generator/","applicationCategory":"GameApplication","operatingSystem":"Any","browserRequirements":"Requires JavaScript","description":"Free Aion 2 Gladiator name generator. Heavy, battle-hardened names for frontline bruisers. Male & female names for Elyos and Asmodian, copied in one click.","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"}},{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Aion 2 Name Generator","item":"https://www.aion2namegenerator.org/"},{"@type":"ListItem","position":2,"name":"Gladiator Name Generator","item":"https://www.aion2namegenerator.org/gladiator-name-generator/"}]},{"@type":"FAQPage","mainEntity":[{"@type":"Question","name":"What is a good Gladiator name in Aion 2?","acceptedAnswer":{"@type":"Answer","text":"Strong Gladiator names are short and forceful. Something like Brakgar, Thorvan or Steelfury works because the hard consonants match the class fantasy. Use the generator above with the class locked to Gladiator for unlimited ideas."}},{"@type":"Question","name":"Should my Gladiator name be different for Elyos and Asmodian?","acceptedAnswer":{"@type":"Answer","text":"It doesn't have to be, but it helps you blend in. Elyos names tend to be smoother with vowels like a, e and i, while Asmodian names use harsher sounds like z, k and th. Pick a faction in the generator and the syllables adjust automatically."}},{"@type":"Question","name":"How do I use the Gladiator name generator?","acceptedAnswer":{"@type":"Answer","text":"The class is already set to Gladiator. Choose Elyos or Asmodian, pick a gender and tone, then hit Generate. Click any name to copy it, or ☆ to save it to your shortlist."}}]}]}</script>
 </head>
 <body>
@@ -68,11 +68,24 @@
 <label class="field"><span>Class</span><select name="cls"><option value="any">Any class</option><option value="gladiator" selected>Gladiator</option><option value="templar">Templar</option><option value="assassin">Assassin</option><option value="ranger">Ranger</option><option value="sorcerer">Sorcerer</option><option value="spiritmaster">Spiritmaster</option><option value="cleric">Cleric</option><option value="chanter">Chanter</option></select></label>
 <label class="field"><span>Tone</span><select name="style"><option value="any">Mixed</option><option value="fantasy">Fantasy</option><option value="lore">Lore-inspired</option><option value="compound">Epic compound</option><option value="short">Short & clean</option></select></label>
 <label class="field"><span>Starts with</span><input type="text" name="startsWith" maxlength="3" placeholder="Any letter, e.g. K" autocomplete="off" spellcheck="false"></label>
-<label class="field"><span>Max length: <b class="len-out">12</b></span><input type="range" name="maxLen" min="4" max="16" value="12"></label>
+<label class="field"><span>Max length: <b class="len-out">12</b></span><input type="range" name="maxLen" min="4" max="16" value="12" aria-describedby="length-note"></label>
 </div>
+<p class="hint length-note" id="length-note">Length is a tool preference, not a verified game limit. See the regional rules below.</p>
 <div class="gen-actions"><button class="btn" type="submit">Generate Names</button><button type="button" class="btn btn-ghost btn-sm copy-all">Copy all</button><p class="hint">Click a name to copy · ☆ save · ↻ spelling variants if it's taken</p></div>
 </form>
-<ul class="results" aria-live="polite"><li class="name-card" data-faction="asmodian"><span class="name-text">Sarak</span><span class="name-meta">Asmodian · Male · Gladiator</span></li><li class="name-card" data-faction="asmodian"><span class="name-text">Morys</span><span class="name-meta">Asmodian · Female · Gladiator</span></li><li class="name-card" data-faction="elyos"><span class="name-text">Elys</span><span class="name-meta">Elyos · Female · Gladiator</span></li><li class="name-card" data-faction="elyos"><span class="name-text">Alella</span><span class="name-meta">Elyos · Female · Gladiator</span></li><li class="name-card" data-faction="asmodian"><span class="name-text">Brael</span><span class="name-meta">Asmodian · Male · Gladiator</span></li><li class="name-card" data-faction="elyos"><span class="name-text">Aeleel</span><span class="name-meta">Elyos · Male · Gladiator</span></li><li class="name-card" data-faction="elyos"><span class="name-text">Nezen</span><span class="name-meta">Elyos · Male · Gladiator</span></li><li class="name-card" data-faction="elyos"><span class="name-text">Garys</span><span class="name-meta">Elyos · Female · Gladiator</span></li><li class="name-card" data-faction="asmodian"><span class="name-text">Trinxiara</span><span class="name-meta">Asmodian · Female · Gladiator</span></li><li class="name-card" data-faction="elyos"><span class="name-text">Sancox</span><span class="name-meta">Elyos · Male · Gladiator</span></li></ul>
+<details class="naming-rules" id="naming-rules">
+<summary>Name length &amp; regional rules <span>Global · KR · TW</span></summary>
+<p><strong>12 is this tool's default length preference.</strong> The slider lets you choose a maximum of 4–16 letters; generated names use A–Z only and have at least 3 letters. These are generator settings, not a guarantee that a name meets your region's game rules.</p>
+<div class="table-wrap"><table>
+<thead><tr><th scope="col">Region</th><th scope="col">What is verified</th></tr></thead>
+<tbody>
+<tr><th scope="row">Global</th><td><strong>Current limits unverified by this site.</strong> Check the current character-creation screen for length, allowed characters and name availability. We do not apply the Korean reservation rules to Global.</td></tr>
+<tr><th scope="row">Korea (KR)</th><td><strong>Historical reservation rules, October 16, 2025:</strong> 1–12 characters using Korean, English or digits; names were unique within a server. This is not confirmation of today's live-service rules. <a href="https://about.ncsoft.com/en/news/article/aion2_update_251016">NCSOFT announcement</a>.</td></tr>
+<tr><th scope="row">Taiwan (TW)</th><td><strong>Current limits unverified by this site.</strong> The <a href="https://about.ncsoft.com/tw/news/article/aion2_update_251016_2">Taiwan announcement of October 16, 2025</a> directs players to local event rules without specifying a length limit. We do not assume the Korean limit applies.</td></tr>
+</tbody></table></div>
+<p class="hint">Sources reviewed October 9, 2026. The generator filters exact matches to a curated list of well-known Aion characters for originality; this is not an official reserved-name list. Availability and acceptance must be checked in game.</p>
+</details>
+<ul class="results" aria-live="polite"><li class="name-card" data-faction="asmodian"><span class="name-text">Sarak</span><span class="name-meta">Asmodian · Male · Gladiator</span></li><li class="name-card" data-faction="asmodian"><span class="name-text">Nightbrand</span><span class="name-meta">Asmodian · Male · Gladiator</span></li><li class="name-card" data-faction="asmodian"><span class="name-text">Voidrage</span><span class="name-meta">Asmodian · Female · Gladiator</span></li><li class="name-card" data-faction="asmodian"><span class="name-text">Azyx</span><span class="name-meta">Asmodian · Female · Gladiator</span></li><li class="name-card" data-faction="elyos"><span class="name-text">Para</span><span class="name-meta">Elyos · Female · Gladiator</span></li><li class="name-card" data-faction="asmodian"><span class="name-text">Maloth</span><span class="name-meta">Asmodian · Male · Gladiator</span></li><li class="name-card" data-faction="asmodian"><span class="name-text">Koriel</span><span class="name-meta">Asmodian · Female · Gladiator</span></li><li class="name-card" data-faction="elyos"><span class="name-text">Arus</span><span class="name-meta">Elyos · Male · Gladiator</span></li><li class="name-card" data-faction="elyos"><span class="name-text">Garine</span><span class="name-meta">Elyos · Female · Gladiator</span></li><li class="name-card" data-faction="elyos"><span class="name-text">Gael</span><span class="name-meta">Elyos · Male · Gladiator</span></li></ul>
 </section>
 <section class="panel favorites" aria-label="Saved names">
 <div class="panel-head"><h3>★ Your saved names</h3><button type="button" class="btn btn-ghost btn-sm fav-clear" hidden>Clear</button></div>
@@ -88,18 +101,18 @@
 
 <div class="cols">
 <div><h2>Elyos Gladiator names</h2>
-<ul class="name-list"><li>Sara</li><li>Arneon</li><li>Hrodiel</li><li>Thoriel</li><li>Hroan</li><li>Inggis</li><li>Korwyn</li><li>Iara</li><li>Hrothee</li><li>Varlios</li><li>Lyracewyn</li><li>Gloryblade</li></ul></div>
+<ul class="name-list"><li>Sara</li><li>Korar</li><li>Varais</li><li>Yusielle</li><li>Elyraeth</li><li>Varae</li><li>Dawnreaver</li><li>Vertos</li><li>Olen</li><li>Dramaira</li><li>Ernos</li><li>Ingirak</li></ul></div>
 <div><h2>Asmodian Gladiator names</h2>
-<ul class="name-list"><li>Koriel</li><li>Trinrael</li><li>Zyzena</li><li>Shadowhowl</li><li>Grimhowl</li><li>Malzorak</li><li>Bragan</li><li>Draix</li><li>Shael</li><li>Nyxruax</li><li>Morhmoa</li><li>Bloodreaver</li></ul></div>
+<ul class="name-list"><li>Koriel</li><li>Dragar</li><li>Altamar</li><li>Thorion</li><li>Ravenreaver</li><li>Moryne</li><li>Bragar</li><li>Doomsteel</li><li>Brena</li><li>Rael</li><li>Pandamesh</li><li>Malox</li></ul></div>
 </div>
 <div class="cols">
 <div><h3>Male Gladiator names</h3>
-<ul class="name-list"><li>Iariel</li><li>Ariel</li><li>Zumox</li><li>Brus</li><li>Erox</li><li>Draus</li><li>Voran</li><li>Erleel</li><li>Bragair</li><li>Korkudor</li></ul></div>
+<ul class="name-list"><li>Dratherak</li><li>Ulak</li><li>Ulos</li><li>Thoriel</li><li>Kormir</li><li>Helsian</li><li>Duros</li><li>Goros</li><li>Gorez</li><li>Dramar</li></ul></div>
 <div><h3>Female Gladiator names</h3>
-<ul class="name-list"><li>Dratheara</li><li>Nymoel</li><li>Elyraella</li><li>Taira</li><li>Hrowyn</li><li>Bruthaka</li><li>Garvaeth</li><li>Saena</li><li>Drariara</li><li>Oritheyra</li></ul></div>
+<ul class="name-list"><li>Dralys</li><li>Garae</li><li>Nyena</li><li>Aziel</li><li>Varia</li><li>Hronys</li><li>Branae</li><li>Xiara</li><li>Korlia</li><li>Hrine</li></ul></div>
 </div>
 <h3>Epic Gladiator names</h3>
-<ul class="name-list"><li>Umbrarage</li><li>Bonebreaker</li><li>Skyrend</li><li>Bloodmaul</li><li>Doombrand</li><li>Moonsteel</li><li>Grimbreaker</li><li>Grimrage</li><li>Gleamblade</li><li>Silverreaver</li><li>Doomrage</li><li>Gleambrand</li><li>Umbramaul</li><li>Starblade</li></ul>
+<ul class="name-list"><li>Goldsteel</li><li>Hollowsteel</li><li>Doomrage</li><li>Brightblade</li><li>Purefury</li><li>Grimfury</li><li>Frostbrand</li><li>Blackblade</li><li>Crimsonaxe</li><li>Voidbrand</li><li>Whitefury</li><li>Holyfury</li><li>Dawnblade</li><li>Gleamcleave</li></ul>
 
 <h2>Other Aion 2 class name generators</h2>
 </div>
@@ -116,7 +129,7 @@
 </div>
 <p class="legal">© 2026 aion2namegenerator.org · <a href="/about/">About</a> · <a href="/privacy/">Privacy</a><br>Unofficial fan site, not affiliated with NCSOFT. AION is a trademark of NCSOFT Corporation.</p>
 </div></footer>
-<script src="/assets/namegen.js?v=80952943" defer></script>
-<script src="/assets/app.js?v=fee9bfed" defer></script>
+<script src="/assets/namegen.js?v=646c7ea1" defer></script>
+<script src="/assets/app.js?v=251dbc6b" defer></script>
 </body>
 </html>

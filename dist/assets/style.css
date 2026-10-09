@@ -99,6 +99,13 @@ input[type="range"] { width: 100%; accent-color: var(--accent); }
 .btn-ghost:hover { background: var(--surface-2); }
 .btn-sm { padding: 7px 12px; font-size: .85rem; border-radius: 10px; }
 .hint { color: var(--muted); font-size: .85rem; margin: 0; }
+.length-note { margin-top: 12px; }
+.naming-rules { margin-top: 16px; border-top: 1px solid var(--line); padding-top: 12px; font-size: .9rem; }
+.naming-rules summary { cursor: pointer; color: var(--text); font-weight: 600; }
+.naming-rules summary span { color: var(--muted); font-size: .8rem; font-weight: 400; margin-left: 8px; }
+.naming-rules[open] summary { margin-bottom: 12px; }
+.naming-rules th[scope="row"] { white-space: normal; min-width: 110px; }
+.naming-rules .table-wrap { margin-bottom: 12px; }
 
 .results { list-style: none; padding: 0; margin: 18px 0 0; display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 10px; }
 .results.pop .name-card { animation: pop .28s ease both; }
@@ -121,8 +128,9 @@ input[type="range"] { width: 100%; accent-color: var(--accent); }
 .panel h2, .panel h3 { margin-top: 0; }
 .panel-head { display: flex; justify-content: space-between; align-items: center; gap: 10px; flex-wrap: wrap; }
 .panel-head h2, .panel-head h3 { margin: 0; }
-.inline-form { display: flex; gap: 10px; margin-top: 12px; }
+.inline-form { display: flex; gap: 10px; align-items: end; margin-top: 12px; }
 .inline-form input { flex: 1; }
+.variant-length { flex: 0 0 130px; }
 .fav-empty { color: var(--muted); margin: 10px 0 0; font-size: .92rem; }
 
 /* Cards */
@@ -183,7 +191,8 @@ td.asmo { color: var(--asmo); font-weight: 600; }
   .cols { grid-template-columns: 1fr; }
   .results { grid-template-columns: 1fr; }
   .foot-grid { grid-template-columns: 1fr 1fr; }
-  .inline-form { flex-direction: column; }
+  .inline-form { flex-direction: column; align-items: stretch; }
+  .variant-length { flex-basis: auto; }
   .btn { width: 100%; }
   .gen-actions .btn-ghost { width: auto; }
 }

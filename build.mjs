@@ -17,8 +17,8 @@ const SITE = {
   name: 'Aion 2 Name Generator',
   ga4MeasurementId: 'G-78SPRSKSMN',
   plausibleScriptUrl: 'https://stats.blackholeenglish.com/js/pa--mC4qqgntIU3F98__NNUn.js',
-  updated: '2026-10-07',
-  updatedHuman: 'October 7, 2026'
+  updated: '2026-10-09',
+  updatedHuman: 'October 9, 2026'
 };
 
 const esc = (s) => String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
@@ -42,6 +42,19 @@ function stripTags(s) { return s.replace(/<[^>]+>/g, ''); }
 
 const LOGO = `<svg viewBox="0 0 64 64" aria-hidden="true"><defs><linearGradient id="lg" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#f3d68a"/><stop offset="1" stop-color="#9b7cf6"/></linearGradient></defs><path fill="url(#lg)" d="M32 6c2 7 2 14 0 22-2-8-2-15 0-22zM30 30C22 18 12 14 3 14c5 4 7 9 8 13-3-1-6-1-8 0 5 2 8 5 10 9-2 0-4 0-6 1 6 2 13 3 19 1zm4 0c8-12 18-16 27-16-5 4-7 9-8 13 3-1 6-1 8 0-5 2-8 5-10 9 2 0 4 0 6 1-6 2-13 3-19 1zM32 34l6 8-6 16-6-16z"/></svg>`;
 
+const namingRules = `<details class="naming-rules" id="naming-rules">
+<summary>Name length &amp; regional rules <span>Global · KR · TW</span></summary>
+<p><strong>12 is this tool's default length preference.</strong> The slider lets you choose a maximum of 4–16 letters; generated names use A–Z only and have at least 3 letters. These are generator settings, not a guarantee that a name meets your region's game rules.</p>
+<div class="table-wrap"><table>
+<thead><tr><th scope="col">Region</th><th scope="col">What is verified</th></tr></thead>
+<tbody>
+<tr><th scope="row">Global</th><td><strong>Current limits unverified by this site.</strong> Check the current character-creation screen for length, allowed characters and name availability. We do not apply the Korean reservation rules to Global.</td></tr>
+<tr><th scope="row">Korea (KR)</th><td><strong>Historical reservation rules, October 16, 2025:</strong> 1–12 characters using Korean, English or digits; names were unique within a server. This is not confirmation of today's live-service rules. <a href="https://about.ncsoft.com/en/news/article/aion2_update_251016">NCSOFT announcement</a>.</td></tr>
+<tr><th scope="row">Taiwan (TW)</th><td><strong>Current limits unverified by this site.</strong> The <a href="https://about.ncsoft.com/tw/news/article/aion2_update_251016_2">Taiwan announcement of October 16, 2025</a> directs players to local event rules without specifying a length limit. We do not assume the Korean limit applies.</td></tr>
+</tbody></table></div>
+<p class="hint">Sources reviewed October 9, 2026. The generator filters exact matches to a curated list of well-known Aion characters for originality; this is not an official reserved-name list. Availability and acceptance must be checked in game.</p>
+</details>`;
+
 // ---------------------------------------------------------------- generator widget
 function generatorWidget(preset = {}) {
   const f = preset.faction || 'any';
@@ -57,10 +70,12 @@ function generatorWidget(preset = {}) {
 <label class="field"><span>Class</span><select name="cls"><option value="any"${c === 'any' ? ' selected' : ''}>Any class</option>${CLASS_KEYS.map((k) => `<option value="${k}"${c === k ? ' selected' : ''}>${NG.CLASSES[k].label}</option>`).join('')}</select></label>
 <label class="field"><span>Tone</span><select name="style"><option value="any">Mixed</option>${Object.entries(NG.STYLES).map(([k, v]) => `<option value="${k}">${v}</option>`).join('')}</select></label>
 <label class="field"><span>Starts with</span><input type="text" name="startsWith" maxlength="3" placeholder="Any letter, e.g. K" autocomplete="off" spellcheck="false"></label>
-<label class="field"><span>Max length: <b class="len-out">12</b></span><input type="range" name="maxLen" min="4" max="16" value="12"></label>
+<label class="field"><span>Max length: <b class="len-out">12</b></span><input type="range" name="maxLen" min="4" max="16" value="12" aria-describedby="length-note"></label>
 </div>
+<p class="hint length-note" id="length-note">Length is a tool preference, not a verified game limit. See the regional rules below.</p>
 <div class="gen-actions"><button class="btn" type="submit">Generate Names</button><button type="button" class="btn btn-ghost btn-sm copy-all">Copy all</button><p class="hint">Click a name to copy · ☆ save · ↻ spelling variants if it's taken</p></div>
 </form>
+${namingRules}
 <ul class="results" aria-live="polite">${initial
     .map((n) => `<li class="name-card" data-faction="${n.faction}"><span class="name-text">${esc(n.name)}</span><span class="name-meta">${NG.FACTIONS[n.faction].label} · ${n.gender === 'f' ? 'Female' : 'Male'}${n.cls ? ' · ' + NG.CLASSES[n.cls].label : ''}</span></li>`)
     .join('')}</ul>
@@ -75,8 +90,8 @@ const favoritesPanel = `<section class="panel favorites" aria-label="Saved names
 
 const variantTool = `<section class="panel" id="variant-tool" aria-label="Name variant maker">
 <h3>Name already taken? Make a variant</h3>
-<p class="hint">Character names are unique, so popular picks go fast. Type your favorite and get spelling variants that keep the same sound.</p>
-<form class="inline-form"><input type="text" placeholder="e.g. Ariel" maxlength="16" aria-label="Name to vary" autocomplete="off" spellcheck="false"><button class="btn" type="submit">Show variants</button></form>
+<p class="hint">Try a different spelling, then check availability in game. Variants use the same readability and known-character filters as the generator. Length is a tool preference; <a href="#naming-rules">check regional rules</a>.</p>
+<form class="inline-form"><input type="text" placeholder="e.g. Celara" maxlength="16" aria-label="Name to vary" autocomplete="off" spellcheck="false"><label class="field variant-length"><span>Max length</span><select name="maxLen">${Array.from({ length: 13 }, (_, i) => i + 4).map(n => `<option value="${n}"${n === 12 ? ' selected' : ''}>${n} letters</option>`).join('')}</select></label><button class="btn" type="submit">Show variants</button></form>
 <ul class="results"></ul>
 </section>`;
 
@@ -200,7 +215,7 @@ pages.push({
   description: 'Free Aion 2 name generator for Elyos and Asmodian characters. Pick faction, class and tone, get 10 names instantly. No signup. Runs in your browser.',
   h1: 'Aion 2 Name Generator — Elyos & Asmodian Names',
   eyebrow: 'Free · Elyos & Asmodian · All 8 classes',
-  lead: 'Generate unique character names for Aion 2 in one click. Pick your faction, class and gender, then copy the name straight into character creation.',
+  lead: 'Find a readable fantasy name for your Aion 2 character. Pick your faction, class and gender, then try your favorites at character creation.',
   app: true,
   body: () => `${generatorWidget({ seed: 11 })}
 ${favoritesPanel}
@@ -229,7 +244,7 @@ ${classCards()}
 <ul>
 <li><strong>It fits your faction.</strong> Aion's lore gives each side its own sound. Elyos Empyrean Lords have names like Ariel, Kaisinel and Yustiel, while the Asmodians follow Azphel, Zikel and Marchutan. Matching that sound makes your Daeva feel at home.</li>
 <li><strong>It's easy to read and type.</strong> Party members will whisper you, guildmates will call you out in voice chat, and enemies will see it over your head in the Abyss.</li>
-<li><strong>It's unique enough to be available.</strong> Character names are unique, so obvious picks like "Ariel" or "Shadow" vanish on day one. Small spelling twists such as Aryel or Ariell keep the sound and get you through.</li>
+<li><strong>It gives you alternatives.</strong> The generator avoids exact matches to a curated list of well-known Aion characters. Save a few names and try spelling variants; availability and naming rules still need to be checked on your server.</li>
 <li><strong>It ages well.</strong> Jokes and memes get old fast. A name you'll still like at max level is worth the extra minute.</li>
 </ul>
 
@@ -243,6 +258,7 @@ ${nameList(names({ faction: 'asmodian' }, 14, 202))}
   faq: [
     { q: 'Is this Aion 2 name generator free?', a: 'Yes. It runs entirely in your browser, with no sign-up and no limits. Generate as many names as you like.' },
     { q: 'Are the generated names available in Aion 2?', a: 'The names are randomly built, so most are uncommon, but no outside tool can check live availability on your server. Save a shortlist with ☆ and try them at character creation. If one is taken, the ↻ button suggests spelling variants.' },
+    { q: 'Is 12 characters the official Aion 2 name limit?', a: 'It is this tool\'s default preference. NCSOFT confirmed 1–12 characters for the Korean reservation event on October 16, 2025. We have not verified current Global or Taiwan limits. See the <a href="#naming-rules">regional rules and official sources</a> before choosing a name.' },
     { q: 'What\'s the difference between Elyos and Asmodian names?', a: 'Elyos names use soft, bright sounds and angelic endings like -iel, -ael and -ia. Asmodian names use harsher consonants (z, k, th, r) and endings like -oth, -ak and -eth. You can try both on the <a href="/elyos-name-generator/">Elyos</a> and <a href="/asmodian-name-generator/">Asmodian</a> pages.' },
     { q: 'Which classes does the generator support?', a: 'All eight Aion 2 classes: Gladiator, Templar, Assassin, Ranger, Sorcerer, Spiritmaster, Cleric and Chanter. Each has its own page with themed names.' },
     { q: 'Can I use these names for other games?', a: 'Of course. The names are original fantasy names, so they work for any MMORPG, tabletop campaign or story.' }
@@ -265,13 +281,13 @@ const FACTION_COPY = {
       ['Male endings', '-iel, -ael, -ion, -ius, -ias, -eon, -orn'],
       ['Female endings', '-iel, -ia, -ara, -ella, -ielle, -yra, -wyn'],
       ['Common openings', 'Ae, Al, Ari, Cel, Ely, Lu, Ori, Sol, Aur'],
-      ['Lore roots', 'Ari (Ariel), Kais (Kaisinel), Neze (Nezekan), Yus (Yustiel), Vai (Vaizel), Sanc (Sanctum), Poe (Poeta)'],
+      ['Lore roots', 'Ari (Ariel), Kais (Kaisinel), Nez (Nezekan), Yus (Yustiel), Vai (Vaizel), San (Sanctum), Po (Poeta)'],
       ['Compound words', 'Dawn, Light, Sun, Star, Silver, Gold, Halo, Aether, Glory']
     ],
     faq: [
       { q: 'What do Elyos names sound like?', a: 'Elyos names are bright and melodic, with plenty of vowels and soft consonants like l, r, s and v. Many end in -iel or -ael, echoing Elyos Empyrean Lords such as Ariel, Kaisinel and Yustiel.' },
       { q: 'Can I generate female Elyos names?', a: 'Yes. Set Gender to Female in the generator. Female Elyos names use endings like -ia, -ara, -ielle and -wyn, for example Celara, Lirielle or Aurwyn.' },
-      { q: 'Can I name my character after an Empyrean Lord?', a: 'Exact lord names like Ariel are almost always taken. Try the Lore-inspired tone for names built on their roots (Arion, Kaisor, Yusara), or use ↻ to get spelling variants.' }
+      { q: 'Can I name my character after an Empyrean Lord?', a: 'This generator excludes exact matches to the twelve Empyrean Lords to help you find your own name. The Lore-inspired tone still uses their sound patterns. This is our originality filter, not an official restriction; check acceptance and availability in game.' }
     ]
   },
   asmodian: {
@@ -286,7 +302,7 @@ const FACTION_COPY = {
       ['Male endings', '-oth, -ak, -gar, -uth, -ez, -kar, -mar, -ax'],
       ['Female endings', '-ys, -ra, -eth, -iss, -yx, -esh, -ith, -yne'],
       ['Common openings', 'Az, Bra, Dra, Kha, Kr, Mor, Vor, Xa, Zu, Zik'],
-      ['Lore roots', 'Azph (Azphel), Zik (Zikel), March (Marchutan), Trin (Triniel), Lum (Lumiel), Pandae (Pandaemonium), Morh (Morheim)'],
+      ['Lore roots', 'Aza (Azphel), Zik (Zikel), Mar (Marchutan), Trin (Triniel), Lum (Lumiel), Panda (Pandaemonium), Mor (Morheim)'],
       ['Compound words', 'Dusk, Shadow, Night, Blood, Ash, Raven, Void, Umbra, Dread']
     ],
     faq: [
@@ -509,10 +525,11 @@ ${nameList(names({ style: 'short', maxLen: 5 }, 30, 1301))}
 
 ${variantTool}
 ${favoritesPanel}
+${namingRules}
 
 <div class="content">
 <h2 id="servers">Aion 2 server names</h2>
-<p>Aion 2 servers are split by faction: you create an Elyos character on an Elyos server or an Asmodian character on an Asmodian server. Servers are linked so you can still meet the other faction through rifts and in the Abyss. Because <strong>character names only need to be unique on your own server</strong>, a name that's taken on one server may still be free on another.</p>
+<p>Aion 2 servers are split by faction: you create an Elyos character on an Elyos server or an Asmodian character on an Asmodian server. Servers are linked so you can still meet the other faction through rifts and in the Abyss. Name uniqueness was per server in the 2025 Korean reservation event; check your current region's rules before relying on the same name being available elsewhere.</p>
 
 <h3>European servers</h3>
 <p>Each row is an Elyos server and the Asmodian server it's paired with for the Abyss and other cross-faction modes. <strong>Advanced Access</strong> servers opened first, in the early-access period before launch; <strong>Launch</strong> servers opened for the free-to-play launch on October 5, 2026. Newer worlds are a great chance to claim a short or popular name before anyone else does.</p>
@@ -529,7 +546,7 @@ ${regionSummaryTable(['NA East', 'NA West', 'Latin America', 'Asia'])}
 <div class="content">
 
 <h3>Where do Aion 2 server names come from?</h3>
-<p>Most server names come straight from Aion lore: the twelve <strong>Empyrean Lords</strong> (Siel, Israphel, Ariel, Azphel and the rest), the <strong>Balaur Dragon Lords</strong> (Beritra, Ereshkigal, Meslamtaeda, Fregion, Tiamat) and other mythic figures. They're great inspiration for your own name, though you'll need your own twist since the originals are always taken.</p>
+<p>Most server names come straight from Aion lore: the twelve <strong>Empyrean Lords</strong> (Siel, Israphel, Ariel, Azphel and the rest), the <strong>Balaur Dragon Lords</strong> (Beritra, Ereshkigal, Meslamtaeda, Fregion, Tiamat) and other mythic figures. Use their sound as inspiration for your own name. The generator excludes exact matches to these characters; the reference lists below retain their official names.</p>
 
 <h2 id="empyrean-lords">The Twelve Empyrean Lords</h2>
 <div class="table-wrap"><table>
@@ -539,7 +556,7 @@ ${regionSummaryTable(['NA East', 'NA West', 'Latin America', 'Asia'])}
 <p>Siel and Israphel held the Aetheric Field together and belong to neither faction, which is why their names often sit at the top of both server lists.</p>
 </div>`,
   faq: [
-    { q: 'Are Aion 2 character names unique per server?', a: 'Yes. A name only has to be free on the server you\'re creating your character on, so a name taken on Siel might still be available on another server.' },
+    { q: 'Are Aion 2 character names unique per server?', a: 'NCSOFT confirmed per-server uniqueness for the Korean name-reservation event in October 2025. We have not verified that this applies to every current region. Check the <a href="#naming-rules">regional rules</a> and your character-creation screen.' },
     { q: 'What are the Aion 2 server names?', a: `In Europe, Elyos servers include ${SERVERS.Europe.aa.slice(0, 6).map((p) => p[0]).join(', ')} and more, while Asmodian servers include ${SERVERS.Europe.aa.slice(0, 6).map((p) => p[1]).join(', ')} and more. See the full tables above, based on NCSOFT's server notice as of ${SERVERS_CHECKED}.` },
     { q: 'Can I transfer my character to another Aion 2 server?', a: 'Yes. NCSOFT says global server transfers open on October 14, 2026, within the same faction, and are initially free. Advanced Access characters can only move between Advanced Access servers. See the <a href="/aion-2-server-transfer/">Aion 2 server transfer guide</a>.' },
     { q: 'Why are Aion 2 servers named Siel, Israphel, Ariel and Azphel?', a: 'They\'re named after the Empyrean Lords and other figures from Aion lore. Siel (Lady of Time) and Israphel (Lord of Space) held the Aetheric Field, Ariel leads the Elyos lords and Azphel leads the Asmodian lords.' },
@@ -590,7 +607,7 @@ ${regionSummaryTable(Object.keys(SERVERS))}
 <p class="note">Based on NCSOFT's server and matchmaking notice as of ${SERVERS_CHECKED}. Transfers between regions haven't been mentioned, so plan on staying in your current region. See the <a href="/aion-2-names-list/#servers">full server list with pairings</a>.</p>
 
 <h2 id="character-names">Will you keep your character name?</h2>
-<p>Character names only have to be unique on a single server, so the name you have now may already belong to someone on your destination server. NCSOFT hasn't explained how the global service handles that yet.</p>
+<p>Your current name may already belong to someone on your destination server. The 2025 Korean reservation event used per-server uniqueness; that does not establish current Global transfer or naming rules. Check your destination's current rules and keep a shortlist of alternatives.</p>
 <p>The Korean version gives a hint: during its July 2026 transfer window, <strong>transferred characters were given a temporary name and had to pick a new one on first login</strong>. If the global service works the same way, you'll want a few names ready before you move, especially if your current name is short or popular.</p>
 <ul>
 <li><strong>Prepare three to five backups.</strong> Save them with ☆ below so they're one click away.</li>
@@ -647,7 +664,7 @@ ${factionCards('/aion-2-server-transfer/')}`,
     { q: 'Are Aion 2 server transfers free?', a: 'Yes, at first. NCSOFT says transfers will initially be free but hasn\'t said how long the free period lasts or what transfers will cost afterwards.' },
     { q: 'Can I transfer from Elyos to Asmodian?', a: 'No. Transfers only move characters between servers of the same faction. Each Aion 2 server houses a single faction, so playing the other side means creating a new character on one of its servers.' },
     { q: 'Can I move from an Advanced Access server to a launch server?', a: 'No. NCSOFT has said Advanced Access characters can only transfer between Advanced Access servers, not to the commercial launch servers.' },
-    { q: 'Will I keep my character name after a server transfer?', a: 'Not guaranteed. Names are unique per server, and NCSOFT hasn\'t confirmed how name conflicts are handled globally. In the Korean version, transferred characters got a temporary name and picked a new one at first login, so keep a few backup names ready. The <a href="/">Aion 2 name generator</a> can help.' },
+    { q: 'Will I keep my character name after a server transfer?', a: 'Do not assume so. Check the current transfer notice and destination-server naming rules for your region; this site has not verified current Global name-conflict handling. Keep a few backup names ready with the <a href="/">Aion 2 name generator</a>.' },
     { q: 'Can I play with friends on another server without transferring?', a: 'Yes. All instanced content, including dungeons, is cross-server, so you can group with friends on other servers before or instead of transferring.' }
   ],
   schema: 'article',
@@ -665,7 +682,7 @@ pages.push({
   body: () => `<div class="content">
 <p>aion2namegenerator.org is a free, fan-made tool that helps Aion 2 players find a character name they'll actually like. Names are generated in your browser from hand-tuned syllable sets for each faction and class, with spelling variants for when your first choice is taken.</p>
 <h2>How the names are made</h2>
-<p>Each faction has its own sound palette, bright and vowel-rich for the Elyos and hard and consonant-heavy for the Asmodians, inspired by the naming patterns in Aion lore. Class pages add themed roots and words. A small filter removes awkward letter clusters and obvious offensive words, but always give a name a quick once-over before you commit.</p>
+<p>Each faction has its own sound palette, bright and vowel-rich for the Elyos and hard and consonant-heavy for the Asmodians, inspired by the naming patterns in Aion lore. Class pages add themed roots and words. The engine compares several candidates for readable vowel and consonant patterns, rejects repeated syllables and obvious offensive words, and excludes exact matches to a curated list of well-known Aion characters. Spelling variants use the same filters. Readability is subjective, and this tool cannot verify in-game availability or current regional naming rules.</p>
 <h2>Disclaimer</h2>
 <p>This is an unofficial fan site. It is not affiliated with, endorsed by or sponsored by NCSOFT. AION and related names are trademarks of NCSOFT Corporation. Server lists are compiled from public information and may be out of date.</p>
 <p><a href="/">← Back to the Aion 2 name generator</a></p>

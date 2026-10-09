@@ -43,7 +43,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700&family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="/assets/style.css?v=77da9e50">
+<link rel="stylesheet" href="/assets/style.css?v=bc95ac1a">
 <script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"WebApplication","name":"Aion 2 Sorcerer Name Generator","url":"https://www.aion2namegenerator.org/sorcerer-name-generator/","applicationCategory":"GameApplication","operatingSystem":"Any","browserRequirements":"Requires JavaScript","description":"Free Aion 2 Sorcerer name generator. Arcane, elemental names for spell-slinging casters. Male & female names for Elyos and Asmodian, copied in one click.","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"}},{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Aion 2 Name Generator","item":"https://www.aion2namegenerator.org/"},{"@type":"ListItem","position":2,"name":"Sorcerer Name Generator","item":"https://www.aion2namegenerator.org/sorcerer-name-generator/"}]},{"@type":"FAQPage","mainEntity":[{"@type":"Question","name":"What are some cool Sorcerer names?","acceptedAnswer":{"@type":"Answer","text":"Myrzar, Xerion, Vyreth, Sunflare and Frostcinder are a few examples. Every click of the generator with the class set to Sorcerer gives 10 new ones."}},{"@type":"Question","name":"Are Sorcerer names different from Spiritmaster names?","acceptedAnswer":{"@type":"Answer","text":"Both are magic users, but this generator gives Sorcerers sharper, elemental-sounding names, while Spiritmaster names lean ethereal and spirit-themed."}},{"@type":"Question","name":"How do I use the Sorcerer name generator?","acceptedAnswer":{"@type":"Answer","text":"The class is already set to Sorcerer. Choose Elyos or Asmodian, pick a gender and tone, then hit Generate. Click any name to copy it, or ☆ to save it to your shortlist."}}]}]}</script>
 </head>
 <body>
@@ -68,11 +68,24 @@
 <label class="field"><span>Class</span><select name="cls"><option value="any">Any class</option><option value="gladiator">Gladiator</option><option value="templar">Templar</option><option value="assassin">Assassin</option><option value="ranger">Ranger</option><option value="sorcerer" selected>Sorcerer</option><option value="spiritmaster">Spiritmaster</option><option value="cleric">Cleric</option><option value="chanter">Chanter</option></select></label>
 <label class="field"><span>Tone</span><select name="style"><option value="any">Mixed</option><option value="fantasy">Fantasy</option><option value="lore">Lore-inspired</option><option value="compound">Epic compound</option><option value="short">Short & clean</option></select></label>
 <label class="field"><span>Starts with</span><input type="text" name="startsWith" maxlength="3" placeholder="Any letter, e.g. K" autocomplete="off" spellcheck="false"></label>
-<label class="field"><span>Max length: <b class="len-out">12</b></span><input type="range" name="maxLen" min="4" max="16" value="12"></label>
+<label class="field"><span>Max length: <b class="len-out">12</b></span><input type="range" name="maxLen" min="4" max="16" value="12" aria-describedby="length-note"></label>
 </div>
+<p class="hint length-note" id="length-note">Length is a tool preference, not a verified game limit. See the regional rules below.</p>
 <div class="gen-actions"><button class="btn" type="submit">Generate Names</button><button type="button" class="btn btn-ghost btn-sm copy-all">Copy all</button><p class="hint">Click a name to copy · ☆ save · ↻ spelling variants if it's taken</p></div>
 </form>
-<ul class="results" aria-live="polite"><li class="name-card" data-faction="elyos"><span class="name-text">Sayra</span><span class="name-meta">Elyos · Female · Sorcerer</span></li><li class="name-card" data-faction="elyos"><span class="name-text">Hael</span><span class="name-meta">Elyos · Male · Sorcerer</span></li><li class="name-card" data-faction="elyos"><span class="name-text">Vyluar</span><span class="name-meta">Elyos · Male · Sorcerer</span></li><li class="name-card" data-faction="asmodian"><span class="name-text">Trinluys</span><span class="name-meta">Asmodian · Female · Sorcerer</span></li><li class="name-card" data-faction="elyos"><span class="name-text">Whiteweaver</span><span class="name-meta">Elyos · Male · Sorcerer</span></li><li class="name-card" data-faction="asmodian"><span class="name-text">Hollowstorm</span><span class="name-meta">Asmodian · Male · Sorcerer</span></li><li class="name-card" data-faction="asmodian"><span class="name-text">Brusthaesh</span><span class="name-meta">Asmodian · Female · Sorcerer</span></li><li class="name-card" data-faction="asmodian"><span class="name-text">Oreoth</span><span class="name-meta">Asmodian · Male · Sorcerer</span></li><li class="name-card" data-faction="elyos"><span class="name-text">Satheos</span><span class="name-meta">Elyos · Male · Sorcerer</span></li><li class="name-card" data-faction="asmodian"><span class="name-text">Moryne</span><span class="name-meta">Asmodian · Female · Sorcerer</span></li></ul>
+<details class="naming-rules" id="naming-rules">
+<summary>Name length &amp; regional rules <span>Global · KR · TW</span></summary>
+<p><strong>12 is this tool's default length preference.</strong> The slider lets you choose a maximum of 4–16 letters; generated names use A–Z only and have at least 3 letters. These are generator settings, not a guarantee that a name meets your region's game rules.</p>
+<div class="table-wrap"><table>
+<thead><tr><th scope="col">Region</th><th scope="col">What is verified</th></tr></thead>
+<tbody>
+<tr><th scope="row">Global</th><td><strong>Current limits unverified by this site.</strong> Check the current character-creation screen for length, allowed characters and name availability. We do not apply the Korean reservation rules to Global.</td></tr>
+<tr><th scope="row">Korea (KR)</th><td><strong>Historical reservation rules, October 16, 2025:</strong> 1–12 characters using Korean, English or digits; names were unique within a server. This is not confirmation of today's live-service rules. <a href="https://about.ncsoft.com/en/news/article/aion2_update_251016">NCSOFT announcement</a>.</td></tr>
+<tr><th scope="row">Taiwan (TW)</th><td><strong>Current limits unverified by this site.</strong> The <a href="https://about.ncsoft.com/tw/news/article/aion2_update_251016_2">Taiwan announcement of October 16, 2025</a> directs players to local event rules without specifying a length limit. We do not assume the Korean limit applies.</td></tr>
+</tbody></table></div>
+<p class="hint">Sources reviewed October 9, 2026. The generator filters exact matches to a curated list of well-known Aion characters for originality; this is not an official reserved-name list. Availability and acceptance must be checked in game.</p>
+</details>
+<ul class="results" aria-live="polite"><li class="name-card" data-faction="elyos"><span class="name-text">Syra</span><span class="name-meta">Elyos · Female · Sorcerer</span></li><li class="name-card" data-faction="elyos"><span class="name-text">Solith</span><span class="name-meta">Elyos · Male · Sorcerer</span></li><li class="name-card" data-faction="elyos"><span class="name-text">Solarflare</span><span class="name-meta">Elyos · Male · Sorcerer</span></li><li class="name-card" data-faction="elyos"><span class="name-text">Lielle</span><span class="name-meta">Elyos · Female · Sorcerer</span></li><li class="name-card" data-faction="asmodian"><span class="name-text">Duskblaze</span><span class="name-meta">Asmodian · Female · Sorcerer</span></li><li class="name-card" data-faction="elyos"><span class="name-text">Lyraniel</span><span class="name-meta">Elyos · Female · Sorcerer</span></li><li class="name-card" data-faction="asmodian"><span class="name-text">Orera</span><span class="name-meta">Asmodian · Female · Sorcerer</span></li><li class="name-card" data-faction="asmodian"><span class="name-text">Xeira</span><span class="name-meta">Asmodian · Female · Sorcerer</span></li><li class="name-card" data-faction="elyos"><span class="name-text">Sieline</span><span class="name-meta">Elyos · Female · Sorcerer</span></li><li class="name-card" data-faction="elyos"><span class="name-text">Daen</span><span class="name-meta">Elyos · Male · Sorcerer</span></li></ul>
 </section>
 <section class="panel favorites" aria-label="Saved names">
 <div class="panel-head"><h3>★ Your saved names</h3><button type="button" class="btn btn-ghost btn-sm fav-clear" hidden>Clear</button></div>
@@ -88,18 +101,18 @@
 
 <div class="cols">
 <div><h2>Elyos Sorcerer names</h2>
-<ul class="name-list"><li>Olthean</li><li>Vytheus</li><li>Aurnean</li><li>Myras</li><li>Yusren</li><li>Starember</li><li>Ignsine</li><li>Xelen</li><li>Taneorn</li><li>Elyceel</li><li>Dara</li><li>Aelyth</li></ul></div>
+<ul class="name-list"><li>Vyliras</li><li>Sania</li><li>Halofrost</li><li>Xelara</li><li>Aetherflare</li><li>Ilfiel</li><li>Sazar</li><li>Salias</li><li>Mawyn</li><li>Celiel</li><li>Polaith</li><li>Kaisys</li></ul></div>
 <div><h2>Asmodian Sorcerer names</h2>
-<ul class="name-list"><li>Ravenblaze</li><li>Azeok</li><li>Pandaeyx</li><li>Gorkuel</li><li>Ignyne</li><li>Ishael</li><li>Kamar</li><li>Xekayne</li><li>Vyx</li><li>Xadous</li><li>Oreruzar</li><li>Mazoix</li></ul></div>
+<ul class="name-list"><li>Ravenblaze</li><li>Ilfix</li><li>Zyra</li><li>Lumez</li><li>Mora</li><li>Krael</li><li>Gorzar</li><li>Grimbolt</li><li>Umbrabolt</li><li>Lumara</li><li>Nyena</li><li>Ilfys</li></ul></div>
 </div>
 <div class="cols">
 <div><h3>Male Sorcerer names</h3>
-<ul class="name-list"><li>Kazorn</li><li>Xeroon</li><li>Ignruth</li><li>Kara</li><li>Zarceyth</li><li>Vygair</li><li>Mael</li><li>Marix</li><li>Zarul</li><li>Zarzeoth</li></ul></div>
+<ul class="name-list"><li>Kazorn</li><li>Orion</li><li>Zara</li><li>Neix</li><li>Celdys</li><li>Ilfion</li><li>Malgion</li><li>Zarus</li><li>Vordozar</li><li>Ervaras</li></ul></div>
 <div><h3>Female Sorcerer names</h3>
-<ul class="name-list"><li>Xeine</li><li>Xeiss</li><li>Zarara</li><li>Nyel</li><li>Alira</li><li>Orenena</li><li>Eshena</li><li>Vyrael</li><li>Ignluelle</li><li>Lilrara</li></ul></div>
+<ul class="name-list"><li>Xeine</li><li>Draesh</li><li>Aurcielle</li><li>Ilfena</li><li>Shaith</li><li>Ilfiel</li><li>Miel</li><li>Lira</li><li>Ilfesh</li><li>Zaria</li></ul></div>
 </div>
 <h3>Epic Sorcerer names</h3>
-<ul class="name-list"><li>Sunspell</li><li>Doomstorm</li><li>Moonbolt</li><li>Goldrime</li><li>Dreadhex</li><li>Lumenweaver</li><li>Gleamfrost</li><li>Skyhex</li><li>Shadowstorm</li><li>Shadowcinder</li><li>Gleamrime</li><li>Stormember</li><li>Ravenbolt</li><li>Dawnbolt</li></ul>
+<ul class="name-list"><li>Sunspell</li><li>Aetherblaze</li><li>Silverhex</li><li>Doomflare</li><li>Dawncinder</li><li>Lightstorm</li><li>Gloomember</li><li>Gleamhex</li><li>Gloomrime</li><li>Holybolt</li><li>Hollowember</li><li>Moonrime</li><li>Gleambolt</li><li>Lumenstorm</li></ul>
 
 <h2>Other Aion 2 class name generators</h2>
 </div>
@@ -116,7 +129,7 @@
 </div>
 <p class="legal">© 2026 aion2namegenerator.org · <a href="/about/">About</a> · <a href="/privacy/">Privacy</a><br>Unofficial fan site, not affiliated with NCSOFT. AION is a trademark of NCSOFT Corporation.</p>
 </div></footer>
-<script src="/assets/namegen.js?v=80952943" defer></script>
-<script src="/assets/app.js?v=fee9bfed" defer></script>
+<script src="/assets/namegen.js?v=646c7ea1" defer></script>
+<script src="/assets/app.js?v=251dbc6b" defer></script>
 </body>
 </html>

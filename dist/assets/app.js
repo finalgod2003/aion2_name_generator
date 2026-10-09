@@ -80,7 +80,7 @@
     setFavBtn(f, item.name);
     f.addEventListener('click', function () { toggleFav(item.name); });
     var v = el('button', 'icon-btn', '↻'); v.type = 'button'; v.title = 'Name taken? Show spelling variants'; v.setAttribute('aria-label', 'Variants of ' + item.name);
-    v.addEventListener('click', function () { showVariants(item.name); });
+    v.addEventListener('click', function () { showVariants(item.name, li); });
     actions.appendChild(c); actions.appendChild(f); actions.appendChild(v);
     li.appendChild(actions);
     return li;
@@ -116,9 +116,13 @@
         return;
       }
       names.forEach(function (n) { list.appendChild(nameCard(n, true)); });
+      if (names.length < opts.count) {
+        list.appendChild(el('li', 'empty', 'Found ' + names.length + ' readable matches. Try a longer maximum or a different starting letter for more.'));
+      }
       list.classList.remove('pop'); void list.offsetWidth; list.classList.add('pop');
     }
     form.addEventListener('submit', function (e) { e.preventDefault(); run(); });
+    if (lenIn) lenIn.addEventListener('change', run);
     $$('input[type=radio], select', form).forEach(function (i) { i.addEventListener('change', run); });
     var copyAll = $('.copy-all', root);
     if (copyAll) copyAll.addEventListener('click', function () {
@@ -142,28 +146,34 @@
   }
 
   // ---------- Variants ----------
-  function showVariants(name) {
+  function showVariants(name, card) {
     var tool = $('#variant-tool');
+    var source = card && card.closest('#variant-tool, .generator');
+    var lengthInput = source ? $('[name="maxLen"]', source) : $('.generator [name="maxLen"]') || $('#variant-tool [name="maxLen"]');
+    var maxLen = lengthInput ? parseInt(lengthInput.value, 10) : 12;
     if (tool) {
       var inp = $('input', tool);
       inp.value = name;
+      $('[name="maxLen"]', tool).value = String(maxLen);
       renderVariants(tool, name);
       tool.scrollIntoView({ behavior: 'smooth', block: 'center' });
       return;
     }
-    var vs = NG.variants(name, 8);
-    toast(vs.length ? 'Try: ' + vs.slice(0, 4).join(', ') : 'No variants found');
+    var vs = NG.variants(name, 8, { maxLen: maxLen });
+    toast(vs.length ? 'Try: ' + vs.slice(0, 4).join(', ') : 'No readable variants fit. Try a longer maximum length.');
   }
   function renderVariants(tool, name) {
     var ul = $('.results', tool);
     ul.innerHTML = '';
-    var vs = NG.variants(name, 12);
-    if (!vs.length) { ul.appendChild(el('li', 'empty', 'Type a name with at least 2 letters.')); return; }
+    var maxLen = parseInt($('[name="maxLen"]', tool).value, 10);
+    var vs = NG.variants(name, 12, { maxLen: maxLen });
+    if (!vs.length) { ul.appendChild(el('li', 'empty', 'No readable variants fit. Try a different name or a longer maximum length.')); return; }
     vs.forEach(function (v) { ul.appendChild(nameCard({ name: v }, false)); });
   }
   function initVariantTool(tool) {
     var form = $('form', tool), inp = $('input', tool);
     form.addEventListener('submit', function (e) { e.preventDefault(); renderVariants(tool, inp.value); });
+    $('[name="maxLen"]', tool).addEventListener('change', function () { if (inp.value) renderVariants(tool, inp.value); });
   }
 
   // ---------- Static name lists (click to copy) ----------

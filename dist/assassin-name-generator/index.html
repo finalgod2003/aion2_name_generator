@@ -43,7 +43,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700&family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="/assets/style.css?v=77da9e50">
+<link rel="stylesheet" href="/assets/style.css?v=bc95ac1a">
 <script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"WebApplication","name":"Aion 2 Assassin Name Generator","url":"https://www.aion2namegenerator.org/assassin-name-generator/","applicationCategory":"GameApplication","operatingSystem":"Any","browserRequirements":"Requires JavaScript","description":"Free Aion 2 Assassin name generator. Sharp, quiet names for stealthy burst killers. Male & female names for Elyos and Asmodian, copied in one click.","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"}},{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Aion 2 Name Generator","item":"https://www.aion2namegenerator.org/"},{"@type":"ListItem","position":2,"name":"Assassin Name Generator","item":"https://www.aion2namegenerator.org/assassin-name-generator/"}]},{"@type":"FAQPage","mainEntity":[{"@type":"Question","name":"What makes a good Assassin name?","acceptedAnswer":{"@type":"Answer","text":"Short, sharp and a little mysterious. Names like Vex, Nyrix, Shade or Duskfang suit the class's stealthy burst play style."}},{"@type":"Question","name":"Can I generate female Assassin names?","acceptedAnswer":{"@type":"Answer","text":"Yes. Set Gender to Female and Class to Assassin and the generator uses feminine endings such as -ira, -yss and -ith."}},{"@type":"Question","name":"How do I use the Assassin name generator?","acceptedAnswer":{"@type":"Answer","text":"The class is already set to Assassin. Choose Elyos or Asmodian, pick a gender and tone, then hit Generate. Click any name to copy it, or ☆ to save it to your shortlist."}}]}]}</script>
 </head>
 <body>
@@ -68,11 +68,24 @@
 <label class="field"><span>Class</span><select name="cls"><option value="any">Any class</option><option value="gladiator">Gladiator</option><option value="templar">Templar</option><option value="assassin" selected>Assassin</option><option value="ranger">Ranger</option><option value="sorcerer">Sorcerer</option><option value="spiritmaster">Spiritmaster</option><option value="cleric">Cleric</option><option value="chanter">Chanter</option></select></label>
 <label class="field"><span>Tone</span><select name="style"><option value="any">Mixed</option><option value="fantasy">Fantasy</option><option value="lore">Lore-inspired</option><option value="compound">Epic compound</option><option value="short">Short & clean</option></select></label>
 <label class="field"><span>Starts with</span><input type="text" name="startsWith" maxlength="3" placeholder="Any letter, e.g. K" autocomplete="off" spellcheck="false"></label>
-<label class="field"><span>Max length: <b class="len-out">12</b></span><input type="range" name="maxLen" min="4" max="16" value="12"></label>
+<label class="field"><span>Max length: <b class="len-out">12</b></span><input type="range" name="maxLen" min="4" max="16" value="12" aria-describedby="length-note"></label>
 </div>
+<p class="hint length-note" id="length-note">Length is a tool preference, not a verified game limit. See the regional rules below.</p>
 <div class="gen-actions"><button class="btn" type="submit">Generate Names</button><button type="button" class="btn btn-ghost btn-sm copy-all">Copy all</button><p class="hint">Click a name to copy · ☆ save · ↻ spelling variants if it's taken</p></div>
 </form>
-<ul class="results" aria-live="polite"><li class="name-card" data-faction="elyos"><span class="name-text">Shiek</span><span class="name-meta">Elyos · Male · Assassin</span></li><li class="name-card" data-faction="asmodian"><span class="name-text">Ishalgar</span><span class="name-meta">Asmodian · Male · Assassin</span></li><li class="name-card" data-faction="asmodian"><span class="name-text">Kaiss</span><span class="name-meta">Asmodian · Female · Assassin</span></li><li class="name-card" data-faction="elyos"><span class="name-text">Orisian</span><span class="name-meta">Elyos · Male · Assassin</span></li><li class="name-card" data-faction="asmodian"><span class="name-text">Brusyne</span><span class="name-meta">Asmodian · Female · Assassin</span></li><li class="name-card" data-faction="asmodian"><span class="name-text">Grimmark</span><span class="name-meta">Asmodian · Female · Assassin</span></li><li class="name-card" data-faction="asmodian"><span class="name-text">Noxguir</span><span class="name-meta">Asmodian · Male · Assassin</span></li><li class="name-card" data-faction="elyos"><span class="name-text">Soliel</span><span class="name-meta">Elyos · Male · Assassin</span></li><li class="name-card" data-faction="asmodian"><span class="name-text">Drara</span><span class="name-meta">Asmodian · Female · Assassin</span></li><li class="name-card" data-faction="elyos"><span class="name-text">Haloveil</span><span class="name-meta">Elyos · Male · Assassin</span></li></ul>
+<details class="naming-rules" id="naming-rules">
+<summary>Name length &amp; regional rules <span>Global · KR · TW</span></summary>
+<p><strong>12 is this tool's default length preference.</strong> The slider lets you choose a maximum of 4–16 letters; generated names use A–Z only and have at least 3 letters. These are generator settings, not a guarantee that a name meets your region's game rules.</p>
+<div class="table-wrap"><table>
+<thead><tr><th scope="col">Region</th><th scope="col">What is verified</th></tr></thead>
+<tbody>
+<tr><th scope="row">Global</th><td><strong>Current limits unverified by this site.</strong> Check the current character-creation screen for length, allowed characters and name availability. We do not apply the Korean reservation rules to Global.</td></tr>
+<tr><th scope="row">Korea (KR)</th><td><strong>Historical reservation rules, October 16, 2025:</strong> 1–12 characters using Korean, English or digits; names were unique within a server. This is not confirmation of today's live-service rules. <a href="https://about.ncsoft.com/en/news/article/aion2_update_251016">NCSOFT announcement</a>.</td></tr>
+<tr><th scope="row">Taiwan (TW)</th><td><strong>Current limits unverified by this site.</strong> The <a href="https://about.ncsoft.com/tw/news/article/aion2_update_251016_2">Taiwan announcement of October 16, 2025</a> directs players to local event rules without specifying a length limit. We do not assume the Korean limit applies.</td></tr>
+</tbody></table></div>
+<p class="hint">Sources reviewed October 9, 2026. The generator filters exact matches to a curated list of well-known Aion characters for originality; this is not an official reserved-name list. Availability and acceptance must be checked in game.</p>
+</details>
+<ul class="results" aria-live="polite"><li class="name-card" data-faction="elyos"><span class="name-text">Shiek</span><span class="name-meta">Elyos · Male · Assassin</span></li><li class="name-card" data-faction="elyos"><span class="name-text">Lyraeth</span><span class="name-meta">Elyos · Female · Assassin</span></li><li class="name-card" data-faction="asmodian"><span class="name-text">Altaeth</span><span class="name-meta">Asmodian · Male · Assassin</span></li><li class="name-card" data-faction="elyos"><span class="name-text">Karas</span><span class="name-meta">Elyos · Male · Assassin</span></li><li class="name-card" data-faction="asmodian"><span class="name-text">Nyxiel</span><span class="name-meta">Asmodian · Female · Assassin</span></li><li class="name-card" data-faction="elyos"><span class="name-text">Nyel</span><span class="name-meta">Elyos · Male · Assassin</span></li><li class="name-card" data-faction="asmodian"><span class="name-text">Moria</span><span class="name-meta">Asmodian · Female · Assassin</span></li><li class="name-card" data-faction="elyos"><span class="name-text">Minea</span><span class="name-meta">Elyos · Female · Assassin</span></li><li class="name-card" data-faction="asmodian"><span class="name-text">Zion</span><span class="name-meta">Asmodian · Male · Assassin</span></li><li class="name-card" data-faction="asmodian"><span class="name-text">Zyrez</span><span class="name-meta">Asmodian · Male · Assassin</span></li></ul>
 </section>
 <section class="panel favorites" aria-label="Saved names">
 <div class="panel-head"><h3>★ Your saved names</h3><button type="button" class="btn btn-ghost btn-sm fav-clear" hidden>Clear</button></div>
@@ -88,18 +101,18 @@
 
 <div class="cols">
 <div><h2>Elyos Assassin names</h2>
-<ul class="name-list"><li>Nyel</li><li>Solsis</li><li>Veelle</li><li>Zye</li><li>Luyss</li><li>Sielwyn</li><li>Halowhisper</li><li>Whiteveil</li><li>Zyceira</li><li>Glorymark</li><li>Shisiena</li><li>Vexiel</li></ul></div>
+<ul class="name-list"><li>Niel</li><li>Nyra</li><li>Glorymark</li><li>Shios</li><li>Holyveil</li><li>Kaix</li><li>Celorn</li><li>Shia</li><li>Aelys</li><li>Eraek</li><li>Thiel</li><li>Tias</li></ul></div>
 <div><h2>Asmodian Assassin names</h2>
-<ul class="name-list"><li>Wolfkiss</li><li>Shaeth</li><li>Doomwhisper</li><li>Blooddagger</li><li>Azphek</li><li>Saneel</li><li>Lumith</li><li>Ishaxiss</li><li>Azith</li><li>Ashedge</li><li>Lykaith</li><li>Mora</li></ul></div>
+<ul class="name-list"><li>Wolfkiss</li><li>Morak</li><li>Rhadouth</li><li>Marael</li><li>Brae</li><li>Veldel</li><li>Marix</li><li>Zakukar</li><li>Lumae</li><li>Zyruth</li><li>Nira</li><li>Tryne</li></ul></div>
 </div>
 <div class="cols">
 <div><h3>Male Assassin names</h3>
-<ul class="name-list"><li>Kacear</li><li>Nek</li><li>Zureax</li><li>Khair</li><li>Durak</li><li>Saruek</li><li>Reemoax</li><li>Reemoix</li><li>Solraus</li><li>Noxae</li></ul></div>
+<ul class="name-list"><li>Kacear</li><li>Haciel</li><li>Malys</li><li>Kaeth</li><li>Vexix</li><li>Sagus</li><li>Morar</li><li>Shizae</li><li>Caeraix</li><li>Elith</li></ul></div>
 <div><h3>Female Assassin names</h3>
-<ul class="name-list"><li>Morxix</li><li>Islaelle</li><li>Reeleel</li><li>Sevxieth</li><li>Sara</li><li>Raira</li><li>Salaena</li><li>Vexmael</li><li>Yuceis</li><li>Salae</li></ul></div>
+<ul class="name-list"><li>Veine</li><li>Velys</li><li>Saeth</li><li>Zira</li><li>Reys</li><li>Zymesh</li><li>Ilariel</li><li>Sline</li><li>Nyshaka</li><li>Ilaliel</li></ul></div>
 </div>
 <h3>Epic Assassin names</h3>
-<ul class="name-list"><li>Bloodkiss</li><li>Goldkiss</li><li>Hollowedge</li><li>Frostdagger</li><li>Grimwhisper</li><li>Aetherveil</li><li>Gleamdagger</li><li>Sunmark</li><li>Stardagger</li><li>Aethermark</li><li>Morningvenom</li><li>Solardagger</li><li>Bloodedge</li><li>Crimsonvenom</li></ul>
+<ul class="name-list"><li>Morningthorn</li><li>Umbradagger</li><li>Ravenmark</li><li>Halofang</li><li>Duskstalker</li><li>Gloomvenom</li><li>Stormvenom</li><li>Duskshade</li><li>Gloomstep</li><li>Haloveil</li><li>Goldfang</li><li>Dayedge</li><li>Dreadkiss</li><li>Dawnshade</li></ul>
 
 <h2>Other Aion 2 class name generators</h2>
 </div>
@@ -116,7 +129,7 @@
 </div>
 <p class="legal">© 2026 aion2namegenerator.org · <a href="/about/">About</a> · <a href="/privacy/">Privacy</a><br>Unofficial fan site, not affiliated with NCSOFT. AION is a trademark of NCSOFT Corporation.</p>
 </div></footer>
-<script src="/assets/namegen.js?v=80952943" defer></script>
-<script src="/assets/app.js?v=fee9bfed" defer></script>
+<script src="/assets/namegen.js?v=646c7ea1" defer></script>
+<script src="/assets/app.js?v=251dbc6b" defer></script>
 </body>
 </html>

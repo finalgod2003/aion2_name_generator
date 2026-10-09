@@ -43,7 +43,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700&family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="/assets/style.css?v=77da9e50">
+<link rel="stylesheet" href="/assets/style.css?v=bc95ac1a">
 <script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"WebApplication","name":"Aion 2 Cleric Name Generator","url":"https://www.aion2namegenerator.org/cleric-name-generator/","applicationCategory":"GameApplication","operatingSystem":"Any","browserRequirements":"Requires JavaScript","description":"Free Aion 2 Cleric name generator. Graceful, holy names for healers. Male & female names for Elyos and Asmodian, copied in one click.","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"}},{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Aion 2 Name Generator","item":"https://www.aion2namegenerator.org/"},{"@type":"ListItem","position":2,"name":"Cleric Name Generator","item":"https://www.aion2namegenerator.org/cleric-name-generator/"}]},{"@type":"FAQPage","mainEntity":[{"@type":"Question","name":"What are some pretty Cleric names for Aion 2?","acceptedAnswer":{"@type":"Answer","text":"Seraphine, Amariel, Celara, Lysine and Halobloom are popular styles. Lock the class to Cleric and gender to Female above for more graceful names."}},{"@type":"Question","name":"Is the Cleric the healer class in Aion 2?","acceptedAnswer":{"@type":"Answer","text":"Yes. The Cleric is the main healer, so this generator gives it soft, holy-sounding names."}},{"@type":"Question","name":"How do I use the Cleric name generator?","acceptedAnswer":{"@type":"Answer","text":"The class is already set to Cleric. Choose Elyos or Asmodian, pick a gender and tone, then hit Generate. Click any name to copy it, or ☆ to save it to your shortlist."}}]}]}</script>
 </head>
 <body>
@@ -68,11 +68,24 @@
 <label class="field"><span>Class</span><select name="cls"><option value="any">Any class</option><option value="gladiator">Gladiator</option><option value="templar">Templar</option><option value="assassin">Assassin</option><option value="ranger">Ranger</option><option value="sorcerer">Sorcerer</option><option value="spiritmaster">Spiritmaster</option><option value="cleric" selected>Cleric</option><option value="chanter">Chanter</option></select></label>
 <label class="field"><span>Tone</span><select name="style"><option value="any">Mixed</option><option value="fantasy">Fantasy</option><option value="lore">Lore-inspired</option><option value="compound">Epic compound</option><option value="short">Short & clean</option></select></label>
 <label class="field"><span>Starts with</span><input type="text" name="startsWith" maxlength="3" placeholder="Any letter, e.g. K" autocomplete="off" spellcheck="false"></label>
-<label class="field"><span>Max length: <b class="len-out">12</b></span><input type="range" name="maxLen" min="4" max="16" value="12"></label>
+<label class="field"><span>Max length: <b class="len-out">12</b></span><input type="range" name="maxLen" min="4" max="16" value="12" aria-describedby="length-note"></label>
 </div>
+<p class="hint length-note" id="length-note">Length is a tool preference, not a verified game limit. See the regional rules below.</p>
 <div class="gen-actions"><button class="btn" type="submit">Generate Names</button><button type="button" class="btn btn-ghost btn-sm copy-all">Copy all</button><p class="hint">Click a name to copy · ☆ save · ↻ spelling variants if it's taken</p></div>
 </form>
-<ul class="results" aria-live="polite"><li class="name-card" data-faction="elyos"><span class="name-text">Gleambloom</span><span class="name-meta">Elyos · Female · Cleric</span></li><li class="name-card" data-faction="elyos"><span class="name-text">Poen</span><span class="name-meta">Elyos · Male · Cleric</span></li><li class="name-card" data-faction="asmodian"><span class="name-text">Ishalith</span><span class="name-meta">Asmodian · Female · Cleric</span></li><li class="name-card" data-faction="asmodian"><span class="name-text">Lykaus</span><span class="name-meta">Asmodian · Male · Cleric</span></li><li class="name-card" data-faction="asmodian"><span class="name-text">Shadowbalm</span><span class="name-meta">Asmodian · Female · Cleric</span></li><li class="name-card" data-faction="asmodian"><span class="name-text">Zikan</span><span class="name-meta">Asmodian · Male · Cleric</span></li><li class="name-card" data-faction="asmodian"><span class="name-text">Grimfaith</span><span class="name-meta">Asmodian · Female · Cleric</span></li><li class="name-card" data-faction="asmodian"><span class="name-text">Belshaeth</span><span class="name-meta">Asmodian · Female · Cleric</span></li><li class="name-card" data-faction="elyos"><span class="name-text">Seis</span><span class="name-meta">Elyos · Female · Cleric</span></li><li class="name-card" data-faction="asmodian"><span class="name-text">Elekaith</span><span class="name-meta">Asmodian · Female · Cleric</span></li></ul>
+<details class="naming-rules" id="naming-rules">
+<summary>Name length &amp; regional rules <span>Global · KR · TW</span></summary>
+<p><strong>12 is this tool's default length preference.</strong> The slider lets you choose a maximum of 4–16 letters; generated names use A–Z only and have at least 3 letters. These are generator settings, not a guarantee that a name meets your region's game rules.</p>
+<div class="table-wrap"><table>
+<thead><tr><th scope="col">Region</th><th scope="col">What is verified</th></tr></thead>
+<tbody>
+<tr><th scope="row">Global</th><td><strong>Current limits unverified by this site.</strong> Check the current character-creation screen for length, allowed characters and name availability. We do not apply the Korean reservation rules to Global.</td></tr>
+<tr><th scope="row">Korea (KR)</th><td><strong>Historical reservation rules, October 16, 2025:</strong> 1–12 characters using Korean, English or digits; names were unique within a server. This is not confirmation of today's live-service rules. <a href="https://about.ncsoft.com/en/news/article/aion2_update_251016">NCSOFT announcement</a>.</td></tr>
+<tr><th scope="row">Taiwan (TW)</th><td><strong>Current limits unverified by this site.</strong> The <a href="https://about.ncsoft.com/tw/news/article/aion2_update_251016_2">Taiwan announcement of October 16, 2025</a> directs players to local event rules without specifying a length limit. We do not assume the Korean limit applies.</td></tr>
+</tbody></table></div>
+<p class="hint">Sources reviewed October 9, 2026. The generator filters exact matches to a curated list of well-known Aion characters for originality; this is not an official reserved-name list. Availability and acceptance must be checked in game.</p>
+</details>
+<ul class="results" aria-live="polite"><li class="name-card" data-faction="elyos"><span class="name-text">Gleambloom</span><span class="name-meta">Elyos · Female · Cleric</span></li><li class="name-card" data-faction="asmodian"><span class="name-text">Shadowbalm</span><span class="name-meta">Asmodian · Female · Cleric</span></li><li class="name-card" data-faction="asmodian"><span class="name-text">Lyne</span><span class="name-meta">Asmodian · Female · Cleric</span></li><li class="name-card" data-faction="elyos"><span class="name-text">Haloprayer</span><span class="name-meta">Elyos · Male · Cleric</span></li><li class="name-card" data-faction="asmodian"><span class="name-text">Kamiel</span><span class="name-meta">Asmodian · Male · Cleric</span></li><li class="name-card" data-faction="elyos"><span class="name-text">Lyraira</span><span class="name-meta">Elyos · Female · Cleric</span></li><li class="name-card" data-faction="asmodian"><span class="name-text">Tryne</span><span class="name-meta">Asmodian · Female · Cleric</span></li><li class="name-card" data-faction="elyos"><span class="name-text">Liel</span><span class="name-meta">Elyos · Male · Cleric</span></li><li class="name-card" data-faction="elyos"><span class="name-text">Thece</span><span class="name-meta">Elyos · Male · Cleric</span></li><li class="name-card" data-faction="elyos"><span class="name-text">Piel</span><span class="name-meta">Elyos · Male · Cleric</span></li></ul>
 </section>
 <section class="panel favorites" aria-label="Saved names">
 <div class="panel-head"><h3>★ Your saved names</h3><button type="button" class="btn btn-ghost btn-sm fav-clear" hidden>Clear</button></div>
@@ -88,18 +101,18 @@
 
 <div class="cols">
 <div><h2>Elyos Cleric names</h2>
-<ul class="name-list"><li>Amaneyra</li><li>Yuswyn</li><li>Amalella</li><li>Mavaith</li><li>Starmend</li><li>Cenean</li><li>Sunmend</li><li>Lyrael</li><li>Elea</li><li>Gleamhope</li><li>Elis</li><li>Amaviena</li></ul></div>
+<ul class="name-list"><li>Sivis</li><li>Aurlaira</li><li>Lyce</li><li>Caeleira</li><li>Brightgrace</li><li>Puregrace</li><li>Seras</li><li>Daen</li><li>Thiel</li><li>Brighthope</li><li>Lyros</li><li>Maria</li></ul></div>
 <div><h2>Asmodian Cleric names</h2>
-<ul class="name-list"><li>Beax</li><li>Ceiss</li><li>Gloomsaint</li><li>Sezegar</li><li>Lilith</li><li>Zael</li><li>Ravensaint</li><li>Triel</li><li>Braeth</li><li>Torzoara</li><li>Lyvaith</li><li>Ceyne</li></ul></div>
+<ul class="name-list"><li>Bearuth</li><li>Cemar</li><li>Crimsonbloom</li><li>Hollowmend</li><li>Ceshiel</li><li>Lyzeiss</li><li>Beathion</li><li>Brugia</li><li>Altok</li><li>Ariorn</li><li>Morkiel</li><li>Ishaliss</li></ul></div>
 </div>
 <div class="cols">
 <div><h3>Male Cleric names</h3>
-<ul class="name-list"><li>Oritheon</li><li>Caeriel</li><li>Marokar</li><li>Cear</li><li>Amaen</li><li>Zauth</li><li>Lyel</li><li>Noxar</li><li>Lyremar</li><li>Azel</li></ul></div>
+<ul class="name-list"><li>Orithion</li><li>Kaxia</li><li>Miel</li><li>Hace</li><li>Beazion</li><li>Skiel</li><li>Dramion</li><li>Vorul</li><li>Ariar</li><li>Lion</li></ul></div>
 <div><h3>Female Cleric names</h3>
-<ul class="name-list"><li>Ishazera</li><li>Isviel</li><li>Faesieth</li><li>Beayra</li><li>Malys</li><li>Rayne</li><li>Drarira</li><li>Morxiena</li><li>Lyluys</li><li>Lyneka</li></ul></div>
+<ul class="name-list"><li>Ishara</li><li>Elesieth</li><li>Raira</li><li>Raeth</li><li>Amaeth</li><li>Sael</li><li>Ariss</li><li>Mielle</li><li>Maix</li><li>Lira</li></ul></div>
 </div>
 <h3>Epic Cleric names</h3>
-<ul class="name-list"><li>Moonlight</li><li>Gloryhalo</li><li>Skyhalo</li><li>Bonehalo</li><li>Umbrahalo</li><li>Skybalm</li><li>Dawnmend</li><li>Voidprayer</li><li>Shadowhalo</li><li>Sacredbloom</li><li>Grimmercy</li><li>Aethervigil</li><li>Ashhope</li><li>Ravenlight</li></ul>
+<ul class="name-list"><li>Brighthalo</li><li>Dawnmend</li><li>Bonehope</li><li>Grimmercy</li><li>Aetherlight</li><li>Gloomprayer</li><li>Shadowhalo</li><li>Gleambalm</li><li>Starhope</li><li>Wolfhalo</li><li>Shadowlight</li><li>Hollowbalm</li><li>Skybloom</li><li>Voidbalm</li></ul>
 
 <h2>Other Aion 2 class name generators</h2>
 </div>
@@ -116,7 +129,7 @@
 </div>
 <p class="legal">© 2026 aion2namegenerator.org · <a href="/about/">About</a> · <a href="/privacy/">Privacy</a><br>Unofficial fan site, not affiliated with NCSOFT. AION is a trademark of NCSOFT Corporation.</p>
 </div></footer>
-<script src="/assets/namegen.js?v=80952943" defer></script>
-<script src="/assets/app.js?v=fee9bfed" defer></script>
+<script src="/assets/namegen.js?v=646c7ea1" defer></script>
+<script src="/assets/app.js?v=251dbc6b" defer></script>
 </body>
 </html>

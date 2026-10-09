@@ -43,7 +43,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700&family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="/assets/style.css?v=77da9e50">
+<link rel="stylesheet" href="/assets/style.css?v=bc95ac1a">
 <script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"WebApplication","name":"Asmodian Name Generator","url":"https://www.aion2namegenerator.org/asmodian-name-generator/","applicationCategory":"GameApplication","operatingSystem":"Any","browserRequirements":"Requires JavaScript","description":"Generate dark Asmodian names for Aion 2. Sharp male and female names inspired by Asmodae, Pandaemonium and the Asmodian Empyrean Lords. Free, all classes.","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"}},{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Aion 2 Name Generator","item":"https://www.aion2namegenerator.org/"},{"@type":"ListItem","position":2,"name":"Asmodian Name Generator","item":"https://www.aion2namegenerator.org/asmodian-name-generator/"}]},{"@type":"FAQPage","mainEntity":[{"@type":"Question","name":"What do Asmodian names sound like?","acceptedAnswer":{"@type":"Answer","text":"Asmodian names are darker and sharper than Elyos names. They use hard consonants like z, k, r and th and endings such as -oth, -ak and -eth, echoing lords like Azphel, Zikel and Marchutan."}},{"@type":"Question","name":"Can I generate female Asmodian names?","acceptedAnswer":{"@type":"Answer","text":"Yes. Set Gender to Female. You'll get names like Vyrys, Morith, Zykess or Shaleth, which are dark but elegant."}},{"@type":"Question","name":"Do Asmodian names have to sound evil?","acceptedAnswer":{"@type":"Answer","text":"Not at all. Asmodians aren't villains, they're survivors. Lore-inspired names like Lumena or Trinara are dark without being cartoonishly evil."}}]}]}</script>
 </head>
 <body data-faction="asmodian">
@@ -68,11 +68,24 @@
 <label class="field"><span>Class</span><select name="cls"><option value="any" selected>Any class</option><option value="gladiator">Gladiator</option><option value="templar">Templar</option><option value="assassin">Assassin</option><option value="ranger">Ranger</option><option value="sorcerer">Sorcerer</option><option value="spiritmaster">Spiritmaster</option><option value="cleric">Cleric</option><option value="chanter">Chanter</option></select></label>
 <label class="field"><span>Tone</span><select name="style"><option value="any">Mixed</option><option value="fantasy">Fantasy</option><option value="lore">Lore-inspired</option><option value="compound">Epic compound</option><option value="short">Short & clean</option></select></label>
 <label class="field"><span>Starts with</span><input type="text" name="startsWith" maxlength="3" placeholder="Any letter, e.g. K" autocomplete="off" spellcheck="false"></label>
-<label class="field"><span>Max length: <b class="len-out">12</b></span><input type="range" name="maxLen" min="4" max="16" value="12"></label>
+<label class="field"><span>Max length: <b class="len-out">12</b></span><input type="range" name="maxLen" min="4" max="16" value="12" aria-describedby="length-note"></label>
 </div>
+<p class="hint length-note" id="length-note">Length is a tool preference, not a verified game limit. See the regional rules below.</p>
 <div class="gen-actions"><button class="btn" type="submit">Generate Names</button><button type="button" class="btn btn-ghost btn-sm copy-all">Copy all</button><p class="hint">Click a name to copy · ☆ save · ↻ spelling variants if it's taken</p></div>
 </form>
-<ul class="results" aria-live="polite"><li class="name-card" data-faction="asmodian"><span class="name-text">Kavaiss</span><span class="name-meta">Asmodian · Female</span></li><li class="name-card" data-faction="asmodian"><span class="name-text">Zikguak</span><span class="name-meta">Asmodian · Male</span></li><li class="name-card" data-faction="asmodian"><span class="name-text">Zauth</span><span class="name-meta">Asmodian · Male</span></li><li class="name-card" data-faction="asmodian"><span class="name-text">Belusra</span><span class="name-meta">Asmodian · Female</span></li><li class="name-card" data-faction="asmodian"><span class="name-text">Morthays</span><span class="name-meta">Asmodian · Female</span></li><li class="name-card" data-faction="asmodian"><span class="name-text">Raregar</span><span class="name-meta">Asmodian · Male</span></li><li class="name-card" data-faction="asmodian"><span class="name-text">Grimcleave</span><span class="name-meta">Asmodian · Male</span></li><li class="name-card" data-faction="asmodian"><span class="name-text">Ravaesh</span><span class="name-meta">Asmodian · Female</span></li><li class="name-card" data-faction="asmodian"><span class="name-text">Malan</span><span class="name-meta">Asmodian · Male</span></li><li class="name-card" data-faction="asmodian"><span class="name-text">Israra</span><span class="name-meta">Asmodian · Female</span></li></ul>
+<details class="naming-rules" id="naming-rules">
+<summary>Name length &amp; regional rules <span>Global · KR · TW</span></summary>
+<p><strong>12 is this tool's default length preference.</strong> The slider lets you choose a maximum of 4–16 letters; generated names use A–Z only and have at least 3 letters. These are generator settings, not a guarantee that a name meets your region's game rules.</p>
+<div class="table-wrap"><table>
+<thead><tr><th scope="col">Region</th><th scope="col">What is verified</th></tr></thead>
+<tbody>
+<tr><th scope="row">Global</th><td><strong>Current limits unverified by this site.</strong> Check the current character-creation screen for length, allowed characters and name availability. We do not apply the Korean reservation rules to Global.</td></tr>
+<tr><th scope="row">Korea (KR)</th><td><strong>Historical reservation rules, October 16, 2025:</strong> 1–12 characters using Korean, English or digits; names were unique within a server. This is not confirmation of today's live-service rules. <a href="https://about.ncsoft.com/en/news/article/aion2_update_251016">NCSOFT announcement</a>.</td></tr>
+<tr><th scope="row">Taiwan (TW)</th><td><strong>Current limits unverified by this site.</strong> The <a href="https://about.ncsoft.com/tw/news/article/aion2_update_251016_2">Taiwan announcement of October 16, 2025</a> directs players to local event rules without specifying a length limit. We do not assume the Korean limit applies.</td></tr>
+</tbody></table></div>
+<p class="hint">Sources reviewed October 9, 2026. The generator filters exact matches to a curated list of well-known Aion characters for originality; this is not an official reserved-name list. Availability and acceptance must be checked in game.</p>
+</details>
+<ul class="results" aria-live="polite"><li class="name-card" data-faction="asmodian"><span class="name-text">Kavaiss</span><span class="name-meta">Asmodian · Female</span></li><li class="name-card" data-faction="asmodian"><span class="name-text">Brarok</span><span class="name-meta">Asmodian · Male</span></li><li class="name-card" data-faction="asmodian"><span class="name-text">Malkael</span><span class="name-meta">Asmodian · Female</span></li><li class="name-card" data-faction="asmodian"><span class="name-text">Sevyx</span><span class="name-meta">Asmodian · Female</span></li><li class="name-card" data-faction="asmodian"><span class="name-text">Rael</span><span class="name-meta">Asmodian · Female</span></li><li class="name-card" data-faction="asmodian"><span class="name-text">Vyena</span><span class="name-meta">Asmodian · Female</span></li><li class="name-card" data-faction="asmodian"><span class="name-text">Khauth</span><span class="name-meta">Asmodian · Male</span></li><li class="name-card" data-faction="asmodian"><span class="name-text">Blackblade</span><span class="name-meta">Asmodian · Female</span></li><li class="name-card" data-faction="asmodian"><span class="name-text">Bloodflare</span><span class="name-meta">Asmodian · Male</span></li><li class="name-card" data-faction="asmodian"><span class="name-text">Rauth</span><span class="name-meta">Asmodian · Male</span></li></ul>
 </section>
 <section class="panel favorites" aria-label="Saved names">
 <div class="panel-head"><h3>★ Your saved names</h3><button type="button" class="btn btn-ghost btn-sm fav-clear" hidden>Clear</button></div>
@@ -84,17 +97,17 @@
 <p>The Asmodians live in <strong>Asmodae</strong>, the cold, dim lower half of Atreia, ruled from the fortress-city of Pandaemonium. Generations in the dark hardened them, and their names sound like it: tight consonant clusters, deep vowels and hard endings.</p>
 <p>Look to the Asmodian Empyrean Lords for the template: <strong>Azphel</strong>, <strong>Zikel</strong>, <strong>Marchutan</strong>, <strong>Triniel</strong> and <strong>Lumiel</strong>. This generator builds on that palette with openings like <em>Az-, Kr-, Mor-, Vor-</em> and <em>Zu-</em>, and endings like <em>-oth, -ak, -gar</em> and <em>-eth</em> for men and <em>-ys, -iss, -yx</em> and <em>-esh</em> for women.</p>
 <h2>Asmodian naming patterns</h2>
-<div class="table-wrap"><table><tbody><tr><th scope="row">Male endings</th><td>-oth, -ak, -gar, -uth, -ez, -kar, -mar, -ax</td></tr><tr><th scope="row">Female endings</th><td>-ys, -ra, -eth, -iss, -yx, -esh, -ith, -yne</td></tr><tr><th scope="row">Common openings</th><td>Az, Bra, Dra, Kha, Kr, Mor, Vor, Xa, Zu, Zik</td></tr><tr><th scope="row">Lore roots</th><td>Azph (Azphel), Zik (Zikel), March (Marchutan), Trin (Triniel), Lum (Lumiel), Pandae (Pandaemonium), Morh (Morheim)</td></tr><tr><th scope="row">Compound words</th><td>Dusk, Shadow, Night, Blood, Ash, Raven, Void, Umbra, Dread</td></tr></tbody></table></div>
+<div class="table-wrap"><table><tbody><tr><th scope="row">Male endings</th><td>-oth, -ak, -gar, -uth, -ez, -kar, -mar, -ax</td></tr><tr><th scope="row">Female endings</th><td>-ys, -ra, -eth, -iss, -yx, -esh, -ith, -yne</td></tr><tr><th scope="row">Common openings</th><td>Az, Bra, Dra, Kha, Kr, Mor, Vor, Xa, Zu, Zik</td></tr><tr><th scope="row">Lore roots</th><td>Aza (Azphel), Zik (Zikel), Mar (Marchutan), Trin (Triniel), Lum (Lumiel), Panda (Pandaemonium), Mor (Morheim)</td></tr><tr><th scope="row">Compound words</th><td>Dusk, Shadow, Night, Blood, Ash, Raven, Void, Umbra, Dread</td></tr></tbody></table></div>
 
 <h2>Asmodian male names</h2>
-<ul class="name-list"><li>Zagaul</li><li>Karoel</li><li>Moruth</li><li>Zuguez</li><li>Rhathael</li><li>Vorir</li><li>Mardogar</li><li>Rhaeth</li><li>Durguak</li><li>Torkar</li><li>Bramar</li><li>Xauth</li><li>Ulguir</li><li>Ragar</li><li>Durzear</li><li>Zumouth</li></ul>
+<ul class="name-list"><li>Zagaul</li><li>Sarkar</li><li>Ulgir</li><li>Gorgaul</li><li>Brakan</li><li>Uleth</li><li>Morar</li><li>Khael</li><li>Draez</li><li>Malkar</li><li>Goreir</li><li>Velgar</li><li>Maroth</li><li>Xagakar</li><li>Torzeax</li><li>Morzear</li></ul>
 <h2>Asmodian female names</h2>
-<ul class="name-list"><li>Vyena</li><li>Xithaeth</li><li>Vyzeel</li><li>Ishazeara</li><li>Triesh</li><li>Azena</li><li>Belzeith</li><li>Beleth</li><li>Trivays</li><li>Sharael</li><li>Azys</li><li>Kethaira</li><li>Mora</li><li>Xiara</li><li>Belshayne</li><li>Shaith</li></ul>
+<ul class="name-list"><li>Vyena</li><li>Lyrira</li><li>Belyne</li><li>Malneith</li><li>Kaxyx</li><li>Zathaka</li><li>Morkara</li><li>Nyena</li><li>Xiara</li><li>Raria</li><li>Zyesh</li><li>Keix</li><li>Viel</li><li>Trirys</li><li>Vyra</li><li>Sharyne</li></ul>
 <h2>Lore-inspired Asmodian names</h2>
 <p>Built on roots borrowed from Asmodian gods and places.</p>
-<ul class="name-list"><li>Kroan</li><li>Kroka</li><li>Israneel</li><li>Nyxys</li><li>Beluska</li><li>Azphion</li><li>Altgaez</li><li>Ziketh</li><li>Zikzegar</li><li>Morhion</li><li>Lumus</li><li>Pandaera</li><li>Belusoth</li><li>Nyxrith</li><li>Belusluyx</li><li>Lumzeuth</li></ul>
+<ul class="name-list"><li>Maroth</li><li>Marys</li><li>Belia</li><li>Lumys</li><li>Trinara</li><li>Kriel</li><li>Pandathael</li><li>Ishalesh</li><li>Ishalmar</li><li>Beleth</li><li>Belka</li><li>Moruth</li><li>Ishalok</li><li>Azaith</li><li>Krion</li><li>Ziketh</li></ul>
 <h2>Epic Asmodian names</h2>
-<ul class="name-list"><li>Grimarrow</li><li>Voidvenom</li><li>Crimsonhex</li><li>Bloodrhyme</li><li>Blackreaver</li><li>Shadowfury</li><li>Stormkeep</li><li>Umbraveil</li><li>Grimsteel</li><li>Duskbond</li><li>Moonshade</li><li>Bonekiss</li><li>Voidthorn</li><li>Frostecho</li></ul>
+<ul class="name-list"><li>Grimarrow</li><li>Dreadlight</li><li>Grimsoul</li><li>Dreadwhisper</li><li>Umbravigil</li><li>Ashtrail</li><li>Moonbond</li><li>Bloodspell</li><li>Frostmend</li><li>Blackblaze</li><li>Shadowhope</li><li>Grimcall</li><li>Voidstrider</li><li>Grimoath</li></ul>
 
 <h2>Asmodian names by class</h2>
 <p>Want something tuned to your role? Every class page lets you lock the faction to Asmodian.</p>
@@ -114,7 +127,7 @@
 </div>
 <p class="legal">© 2026 aion2namegenerator.org · <a href="/about/">About</a> · <a href="/privacy/">Privacy</a><br>Unofficial fan site, not affiliated with NCSOFT. AION is a trademark of NCSOFT Corporation.</p>
 </div></footer>
-<script src="/assets/namegen.js?v=80952943" defer></script>
-<script src="/assets/app.js?v=fee9bfed" defer></script>
+<script src="/assets/namegen.js?v=646c7ea1" defer></script>
+<script src="/assets/app.js?v=251dbc6b" defer></script>
 </body>
 </html>
