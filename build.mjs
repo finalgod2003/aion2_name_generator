@@ -5,6 +5,7 @@ import path from 'node:path';
 import crypto from 'node:crypto';
 import { createRequire } from 'node:module';
 import { fileURLToPath } from 'node:url';
+import { CLASS_GUIDES } from './src/class-guides.mjs';
 
 const require = createRequire(import.meta.url);
 const NG = require('./src/assets/namegen.js');
@@ -73,17 +74,26 @@ function generatorWidget(preset = {}) {
 <label class="field"><span>Max length: <b class="len-out">12</b></span><input type="range" name="maxLen" min="4" max="16" value="12" aria-describedby="length-note"></label>
 </div>
 <p class="hint length-note" id="length-note">Length is a tool preference, not a verified game limit. See the regional rules below.</p>
-<div class="gen-actions"><button class="btn" type="submit">Generate Names</button><button type="button" class="btn btn-ghost btn-sm copy-all">Copy all</button><p class="hint">Click a name to copy · ☆ save · ↻ spelling variants if it's taken</p></div>
+<div class="gen-actions"><button class="btn" type="submit">Generate Names</button><button type="button" class="btn btn-ghost btn-sm copy-all">Copy all</button><button type="button" class="btn btn-ghost btn-sm share-filters">Share filters</button><p class="hint">Click a name to copy · ☆ save · ↻ spelling variants if it's taken</p></div>
 </form>
+<div class="share-link-box" hidden><label class="field"><span>Link to these filters &amp; this batch</span><input type="text" readonly aria-label="Shareable filter link"></label><p class="hint">Anyone with this link can view the filters and recreate this batch. Saved names stay in your browser.</p></div>
 ${namingRules}
+<div class="list-toolbar"><span class="hint results-count">10 names</span>${sortControl('result-sort', 'Sort results', 'Generated order')}</div>
+<p class="hint sort-note">Readability uses our spelling heuristic; it is not a game rule or availability check.</p>
 <ul class="results" aria-live="polite">${initial
     .map((n) => `<li class="name-card" data-faction="${n.faction}"><span class="name-text">${esc(n.name)}</span><span class="name-meta">${NG.FACTIONS[n.faction].label} · ${n.gender === 'f' ? 'Female' : 'Male'}${n.cls ? ' · ' + NG.CLASSES[n.cls].label : ''}</span></li>`)
     .join('')}</ul>
 </section>`;
 }
 
+function sortControl(cls, label, original) {
+  return `<label class="sort-control"><span>${label}</span><select class="${cls}"><option value="original">${original}</option><option value="shortest">Length: shortest first</option><option value="longest">Length: longest first</option><option value="readability">Readability: highest first</option></select></label>`;
+}
+
 const favoritesPanel = `<section class="panel favorites" aria-label="Saved names">
-<div class="panel-head"><h3>★ Your saved names</h3><button type="button" class="btn btn-ghost btn-sm fav-clear" hidden>Clear</button></div>
+<div class="panel-head"><h3>★ Your saved names <span class="fav-count hint">0 / 100</span></h3><button type="button" class="btn btn-ghost btn-sm fav-clear" hidden>Clear</button></div>
+<div class="list-toolbar"><div class="shortlist-actions"><button type="button" class="btn btn-ghost btn-sm fav-copy" disabled>Copy saved names</button><button type="button" class="btn btn-ghost btn-sm fav-export" disabled>Export TXT</button></div>${sortControl('fav-sort', 'Sort saved names', 'Recently saved')}</div>
+<p class="hint">Up to 100 names, stored in this browser. Copy and TXT export use the displayed order. Readability is a spelling estimate.</p>
 <p class="fav-empty">Tap ☆ on any name to keep a shortlist here. It's stored only in your browser.</p>
 <ul class="results"></ul>
 </section>`;
@@ -113,93 +123,89 @@ ${HUB_CARDS.filter(([href]) => href !== exclude).map(([href, cls, tag, title, te
 </div>`;
 }
 
+function classGuide(key) {
+  const guide = CLASS_GUIDES[key], label = NG.CLASSES[key].label;
+  return `<section class="class-guide" aria-label="${label} naming guide">
+<h2>${esc(guide.title)}</h2>
+<div class="class-context"><h3>The class behind the name</h3><p>${esc(guide.context)}</p>
+<p class="hint">Sources: <a href="https://about.ncsoft.com/en/news/article/aion2-update-250530-2">NCSOFT class reveal, June 2025</a> · <a href="https://about.ncsoft.com/en/news/article/aion2_update_260325">March 2026 class update</a>. Historical context; skill names and availability may differ by region or update.</p></div>
+<p>${esc(guide.interpretation)}</p>
+${guide.directions.map(([title, body]) => `<h3>${esc(title)}</h3><p>${esc(body)}</p>`).join('')}
+<h2>Six handpicked ${label} names</h2>
+<p class="hint">Original suggestions selected for their sound and theme. These are creative interpretations, not official names or availability claims. Click a name to copy it, or ☆ to save it.</p>
+<ul class="curated-names">${guide.picks.map(([name, theme, reason]) => `<li class="curated-name" data-name="${name}"><div class="panel-head"><button type="button" class="curated-copy" aria-label="Copy ${name}">${name}</button><button type="button" class="icon-btn fav" data-fav="${name}" aria-label="Favorite ${name}" aria-pressed="false">☆</button></div><span class="pick-theme">${esc(theme)}</span><p>${esc(reason)}</p></li>`).join('')}</ul>
+<h3>Try a ${label} naming direction</h3>
+<div class="recipe-links">${guide.recipes.map(([title, faction, style, startsWith, maxLen]) => {
+    const params = new URLSearchParams({ faction, cls: key, style, maxLen, ...(startsWith ? { startsWith } : {}) });
+    return `<a class="recipe-link" href="${classUrl(key)}?${esc(params.toString())}#generator"><strong>${esc(title)} →</strong><span>${NG.FACTIONS[faction].label} · ${esc(NG.STYLES[style])} · up to ${maxLen} letters${startsWith ? ' · starts ' + startsWith : ''}</span></a>`;
+  }).join('')}</div>
+<p class="note"><strong>A final sound check:</strong> ${esc(guide.check)}</p>
+</section>`;
+}
+
 // ---------------------------------------------------------------- class copy
 const CLASS_COPY = {
   gladiator: {
     card: 'Heavy, battle-hardened names for frontline bruisers.',
     lead: 'Forge a name that sounds like steel hitting steel. Generate Gladiator names for Elyos and Asmodian warriors who win fights by charging straight into them.',
-    about: `<p>The Gladiator is Aion 2's frontline bruiser: a heavy-weapon fighter that trades blows up close, shrugs off punishment and turns crowds of enemies into a single, messy problem for them. A good Gladiator name should feel just as heavy. Think short, punchy syllables, hard consonants like <strong>B, G, D, K and R</strong>, and endings such as <em>-gar</em>, <em>-dor</em> and <em>-rak</em>.</p>
-<p>Elyos Gladiators can lean noble and heroic (<em>Varion</em>, <em>Thoras</em>), while Asmodian Gladiators sound right with a rougher, more brutal edge (<em>Brakgar</em>, <em>Korrak</em>). Switch the tone to <strong>Epic compound</strong> if you'd rather have a name that tells people what you do, like <em>Dawnbreaker</em> or <em>Bloodrend</em>.</p>`,
-    tips: ['Keep it under 9 letters: short names read better above your head in big PvP fights.', 'Hard stops (k, g, d, x) at the end of a name make it sound more aggressive.', 'Weapon and fury words (blade, rend, maul, fury) make strong compound names.'],
     faq: [
-      { q: 'What is a good Gladiator name in Aion 2?', a: 'Strong Gladiator names are short and forceful. Something like Brakgar, Thorvan or Steelfury works because the hard consonants match the class fantasy. Use the generator above with the class locked to Gladiator for unlimited ideas.' },
+      { q: 'What is a good Gladiator name in Aion 2?', a: 'Garran gives an arena veteran a firm personal name; Dawnblade suggests a radiant duelist; Ashcleave suits a battle survivor. Choose between a personal name and a combat alias, then use one of the naming directions above to make more.' },
       { q: 'Should my Gladiator name be different for Elyos and Asmodian?', a: 'It doesn\'t have to be, but it helps you blend in. Elyos names tend to be smoother with vowels like a, e and i, while Asmodian names use harsher sounds like z, k and th. Pick a faction in the generator and the syllables adjust automatically.' }
     ]
   },
   templar: {
     card: 'Noble, oath-bound names for shield-wielding tanks.',
     lead: 'Templars hold the line so everyone else can live. Generate dignified, oath-sworn names for Aion 2 Templar tanks on the Elyos and Asmodian sides.',
-    about: `<p>The Templar is Aion 2's dedicated tank: armored, shield in hand, built for damage mitigation and keeping enemies' attention on themselves. Templar names traditionally sound <strong>knightly and dependable</strong>. Think of a holy order, a sworn guardian or the last wall before the healer.</p>
-<p>The generator mixes Templar-flavored roots such as <em>Aeg-</em>, <em>Val-</em>, <em>Ald-</em> and <em>Ser-</em> with endings like <em>-ric</em>, <em>-ard</em> and <em>-ius</em>, which gives names like <em>Aldric</em>, <em>Valerius</em> or <em>Serion</em>. The <strong>Epic compound</strong> tone builds shield-themed names: <em>Dawnward</em>, <em>Silveroath</em> and <em>Grimbastion</em>.</p>`,
-    tips: ['Names ending in -ric, -ard and -ius carry a classic paladin and knight feel.', 'For Asmodian Templars, pair dark words with protective ones: Duskguard, Ashwall.', 'A calm, readable name is easy for your party to call out during a pull.'],
     faq: [
-      { q: 'What are some cool Templar names for Aion 2?', a: 'Try Aldric, Valerion, Aegisar, Dawnward or Ravenshield. Lock the class to Templar in the generator above to get a fresh batch every click.' },
+      { q: 'What are some cool Templar names for Aion 2?', a: 'Aldric and Valen suit sworn knights, while Dawnward and Duskguard make the protective theme explicit. Ravenoath adds the idea of a solemn promise. The curated picks above explain each direction.' },
       { q: 'Is the Templar a tank in Aion 2?', a: 'Yes. The Templar is the main tank class, known for heavy defense, damage mitigation and aggro control, which is why this generator leans toward protective, honorable names.' }
     ]
   },
   assassin: {
     card: 'Sharp, quiet names for stealthy burst killers.',
     lead: 'The best Assassin names are short, sharp and gone before anyone reads them twice. Generate stealthy Aion 2 Assassin names for both factions.',
-    about: `<p>The Assassin is Aion 2's stealth melee class. It strikes from the shadows, deals huge burst damage and relies on timing and positioning. Your name should feel <strong>quick and quiet</strong>. Sibilant sounds (<em>s, sh, z</em>), sharp vowels and x or ix endings fit perfectly: <em>Vexira</em>, <em>Shiyss</em>, <em>Nyrix</em>.</p>
-<p>Asmodian Assassins naturally lean toward the shadows, so names like <em>Zyrix</em> or <em>Triniel</em>-inspired <em>Trinka</em> feel at home. Elyos Assassins can be just as deadly with lighter, elegant names like <em>Saelith</em>. Choose the <strong>Short & clean</strong> tone for names of five letters or fewer.</p>`,
-    tips: ['Under 7 letters is ideal. Assassins should be hard to read and hard to catch.', 'Soft S and SH sounds mixed with a sharp X or K make a name feel like a blade.', 'Compound ideas: Nightfang, Duskwhisper, Shadowveil, Ashstep.'],
     faq: [
-      { q: 'What makes a good Assassin name?', a: 'Short, sharp and a little mysterious. Names like Vex, Nyrix, Shade or Duskfang suit the class\'s stealthy burst play style.' },
+      { q: 'What makes a good Assassin name?', a: 'A clean outline and an easy pronunciation help a short alias stand out. Try Nyra for a quiet personal name, Vexira for an elegant edge, or Ashstep for a fleeting-trace theme.' },
       { q: 'Can I generate female Assassin names?', a: 'Yes. Set Gender to Female and Class to Assassin and the generator uses feminine endings such as -ira, -yss and -ith.' }
     ]
   },
   ranger: {
     card: 'Swift, wild names for bow-wielding hunters.',
     lead: 'Hunters of the wilds need names that carry on the wind. Generate Aion 2 Ranger names inspired by bows, hawks and forest trails.',
-    about: `<p>The Ranger is Aion 2's long-range physical damage dealer, fighting with a bow and traps while keeping enemies at a distance. Ranger names work best when they feel <strong>natural and swift</strong>: soft consonants, airy vowels and endings like <em>-wyn</em>, <em>-ra</em> and <em>-el</em>.</p>
-<p>Elyos Rangers fit sylvan, almost elven names such as <em>Sylwyn</em> or <em>Lirael</em>. Asmodian Rangers can go darker and more predatory with names like <em>Fenrak</em> or <em>Ravenshot</em>. The compound tone mixes your faction's words with hunter terms like <em>arrow, hawk, quill, strider</em> and <em>snare</em>.</p>`,
-    tips: ['Nature roots (Syl-, Fen-, Ash-, Lir-) give a woodland feel.', 'Bird and wind themes suit a class that fights from range: Skyhawk, Galequill.', 'Two syllables are ideal: easy to type in party chat and quick to shout.'],
     faq: [
-      { q: 'What are good Ranger names for Aion 2?', a: 'Sylwyn, Fenara, Lirael, Dawnarrow and Ravenshot are good starting points. Set the class to Ranger above for endless variations.' },
+      { q: 'What are good Ranger names for Aion 2?', a: 'Fenara suggests a landscape, Dawnhawk suggests a lookout, and Raventrail suggests a patient tracker. Start with the place or creature you want to evoke, then keep the name focused on that image.' },
       { q: 'Does the generator check if a Ranger name is available?', a: 'No tool outside the game can check live availability. Generate a shortlist, save your favorites with the ☆ button, then try them at character creation. If one is taken, use ↻ to get spelling variants.' }
     ]
   },
   sorcerer: {
     card: 'Arcane, elemental names for spell-slinging casters.',
     lead: 'Fire, frost and forbidden knowledge. Generate arcane Aion 2 Sorcerer names that sound like they could level a battlefield.',
-    about: `<p>The Sorcerer is Aion 2's ranged magic damage dealer: fragile, but devastating with area spells. Sorcerer names should sound <strong>arcane and a little exotic</strong>. The generator favors letters like <em>Z, X, Y</em> and <em>M</em>, and endings such as <em>-zar</em>, <em>-eus</em> and <em>-yth</em>, giving names like <em>Myrzar</em>, <em>Xerys</em> or <em>Ilfeus</em>.</p>
-<p>For an elemental theme, switch to <strong>Epic compound</strong>: Elyos casters get radiant names like <em>Sunflare</em> or <em>Starember</em>, while Asmodian Sorcerers get <em>Frostcinder</em>, <em>Voidhex</em> and <em>Grimblaze</em>.</p>`,
-    tips: ['Z, X and Y instantly make a name feel magical.', 'Greek-style endings (-eus, -ys, -on) give a scholarly, old-world wizard vibe.', 'Elemental compounds are popular, so check variants if your first pick is taken.'],
     faq: [
-      { q: 'What are some cool Sorcerer names?', a: 'Myrzar, Xerion, Vyreth, Sunflare and Frostcinder are a few examples. Every click of the generator with the class set to Sorcerer gives 10 new ones.' },
+      { q: 'What are some cool Sorcerer names?', a: 'Xerion suits an arcane scholar. Sunflare feels hot and brilliant; Moonrime feels quiet and cold. Frostcinder deliberately combines opposite elements for a more conflicted character.' },
       { q: 'Are Sorcerer names different from Spiritmaster names?', a: 'Both are magic users, but this generator gives Sorcerers sharper, elemental-sounding names, while Spiritmaster names lean ethereal and spirit-themed.' }
     ]
   },
   spiritmaster: {
     card: 'Ethereal names for summoners who command spirits.',
     lead: 'A Spiritmaster never fights alone. Generate ethereal Aion 2 Spiritmaster names for summoners who bind elemental spirits to their will.',
-    about: `<p>The Spiritmaster is Aion 2's summoner and controller. It commands spirits to pressure enemies and lock down the battlefield. The class fantasy is about <strong>bonds, pacts and elemental forces</strong>, so names that feel ethereal and otherworldly work best: soft openings like <em>Ae-, Ori-, Eth-</em> and <em>Sel-</em> with flowing endings like <em>-ora, -yn</em> and <em>-iel</em>.</p>
-<p>Try <em>Oriyn</em>, <em>Ethora</em> or <em>Selaen</em> for Elyos, or <em>Nyroth</em> and <em>Terzoth</em> for Asmodian. With the compound tone you'll get pact-themed names like <em>Starwisp</em>, <em>Gloomcaller</em> and <em>Voidbond</em>.</p>`,
-    tips: ['Names that sound like they belong to the spirit world fit best: airy vowels, few hard stops.', 'Caller, pact, bond and wisp are great compound endings.', 'Some players name their character after the element they focus on.'],
     faq: [
-      { q: 'What is a good Spiritmaster name?', a: 'Ethereal names such as Oriyn, Ethora, Selaen or Gloomcaller suit the summoner fantasy. Use the generator with class set to Spiritmaster for more.' },
+      { q: 'What is a good Spiritmaster name?', a: 'Ethora and Selaen offer soft personal names. Starwisp suggests a gentle companion, while Voidbond and Ashpact emphasize the agreement between a summoner and a spirit.' },
       { q: 'What does the Spiritmaster do in Aion 2?', a: 'It is a summoner and controller class that commands spirits to pressure enemies and provide crowd control and utility.' }
     ]
   },
   cleric: {
     card: 'Graceful, holy names for healers.',
     lead: 'Every party remembers its healer\'s name. Generate graceful, holy Aion 2 Cleric names for Elyos and Asmodian healers.',
-    about: `<p>The Cleric is Aion 2's healer, the person keeping everyone alive. Cleric names tend to be <strong>gentle, graceful and faintly holy</strong>: soft consonants, lots of vowels and endings like <em>-ine</em>, <em>-iel</em> and <em>-ara</em>. Think <em>Seraphine</em>, <em>Amariel</em> or <em>Celara</em>.</p>
-<p>Asmodian healers don't have to sound sweet. Darker devotional names like <em>Lumena</em> (a nod to Lumiel) or <em>Gravemercy</em> work well. The compound tone pairs faction words with healing themes: <em>Dawnmercy</em>, <em>Halobloom</em>, <em>Moonvigil</em>.</p>`,
-    tips: ['The -iel ending echoes Aion\'s Empyrean Lords and fits a divine healer.', 'Make it easy to type. Your party will be whispering it a lot.', 'Healing words (grace, mercy, bloom, vigil) make memorable compound names.'],
     faq: [
-      { q: 'What are some pretty Cleric names for Aion 2?', a: 'Seraphine, Amariel, Celara, Lysine and Halobloom are popular styles. Lock the class to Cleric and gender to Female above for more graceful names.' },
+      { q: 'What are some pretty Cleric names for Aion 2?', a: 'Celara and Amariel have flowing personal-name forms. Dawnmercy feels reassuring, while Moonvigil offers a quieter protective mood. These suggestions can suit any character whose personality matches the theme.' },
       { q: 'Is the Cleric the healer class in Aion 2?', a: 'Yes. The Cleric is the main healer, so this generator gives it soft, holy-sounding names.' }
     ]
   },
   chanter: {
     card: 'Rhythmic, mantra-inspired names for battle supports.',
     lead: 'Half warrior, half hymn. Generate rhythmic Aion 2 Chanter names for the support class that fights on the front line while empowering the party.',
-    about: `<p>The Chanter is Aion 2's hybrid support. It fights with a staff and buffs the party with mantras and chants while still holding its own in melee. Chanter names suit a <strong>monk-like, rhythmic feel</strong>: syllables that roll off the tongue, like <em>Canto</em>, <em>Hanrei</em>, <em>Loryn</em> or <em>Sorantu</em>.</p>
-<p>The generator gives Chanters roots like <em>Ca-, Han-, Lo-, Ry-</em> and endings like <em>-ant, -yr, -ren</em>. The compound tone turns out names like <em>Dawnhymn</em>, <em>Stormchant</em> and <em>Ashmantra</em>, which is perfect if you want people to know you're the one keeping the buffs up.</p>`,
-    tips: ['Musical words (hymn, chant, verse, echo) are a natural fit.', 'Repeating sounds (Lolan, Sesaren) give a name a chant-like rhythm.', 'Chanters are often the shot-caller: pick something short enough to say in voice chat.'],
     faq: [
-      { q: 'What is a good Chanter name?', a: 'Rhythmic, monk-like names such as Canto, Loryn, Hanrei or Dawnhymn suit the class. Use the generator above for more.' },
+      { q: 'What is a good Chanter name?', a: 'Loren and Haren have an even two-beat cadence. Dawnecho suggests a rallying voice, Ashverse a traveling refrain, and Stormsong a forceful battle chorus. Say the name aloud to choose the rhythm you prefer.' },
       { q: 'What role does the Chanter play in Aion 2?', a: 'The Chanter is a support and melee hybrid that empowers allies while still fighting up close, so its names lean toward chant and mantra themes.' }
     ]
   }
@@ -374,25 +380,7 @@ CLASS_KEYS.forEach((k, i) => {
     body: () => `${generatorWidget({ cls: k, seed: 70 + i })}
 ${favoritesPanel}
 <div class="content">
-<h2>Naming your ${K.label}</h2>
-${C.about}
-<h3>Quick tips</h3>
-<ul>${C.tips.map((t) => `<li>${t}</li>`).join('')}</ul>
-
-<div class="cols">
-<div><h2>Elyos ${K.label} names</h2>
-${nameList(names({ faction: 'elyos', cls: k }, 12, 300 + i))}</div>
-<div><h2>Asmodian ${K.label} names</h2>
-${nameList(names({ faction: 'asmodian', cls: k }, 12, 400 + i))}</div>
-</div>
-<div class="cols">
-<div><h3>Male ${K.label} names</h3>
-${nameList(names({ gender: 'm', cls: k, style: 'fantasy' }, 10, 500 + i))}</div>
-<div><h3>Female ${K.label} names</h3>
-${nameList(names({ gender: 'f', cls: k, style: 'fantasy' }, 10, 600 + i))}</div>
-</div>
-<h3>Epic ${K.label} names</h3>
-${nameList(names({ cls: k, style: 'compound' }, 14, 700 + i))}
+${classGuide(k)}
 
 <h2>Other Aion 2 class name generators</h2>
 </div>
@@ -700,6 +688,7 @@ pages.push({
 <p>We keep this simple: the name generator runs entirely in your browser and doesn't require an account.</p>
 <h2>Data stored on your device</h2>
 <p>When you save names with the ☆ button, they're stored in your browser's local storage on your own device. They're never sent to us, and you can clear them at any time with the "Clear" button or by clearing your browser data.</p>
+<p>Copy and TXT export let you take your shortlist with you. Share filters creates a link containing the selected filters (including any starting letters), sorting choice and a number used to recreate the generated batch. These URL parameters are visible to anyone you share the link with and may appear in hosting logs or page-view analytics. The link does not include your saved names.</p>
 <h2>Server logs and third parties</h2>
 <p>Like most websites, our hosting provider may keep standard server logs (such as IP address, browser type and pages requested) for security and performance. Fonts are loaded from Google Fonts, which may receive your IP address when fonts load.</p>
 <h2>Website analytics</h2>
@@ -839,7 +828,7 @@ ${page.faq ? `<div class="content">${faqHtml(page.faq)}</div>` : ''}
 </div>
 <p class="legal">© 2026 aion2namegenerator.org · <a href="/about/">About</a> · <a href="/privacy/">Privacy</a><br>Unofficial fan site, not affiliated with NCSOFT. AION is a trademark of NCSOFT Corporation.</p>
 </div></footer>
-${page.app ? `<script src="/assets/namegen.js?v=${v.ng}" defer></script>\n<script src="/assets/app.js?v=${v.app}" defer></script>` : `<script src="/assets/app.js?v=${v.app}" defer></script>`}
+${page.app ? `<script src="/assets/namegen.js?v=${v.ng}" defer></script>\n<script src="/assets/name-tools.js?v=${v.tools}" defer></script>\n<script src="/assets/app.js?v=${v.app}" defer></script>` : `<script src="/assets/app.js?v=${v.app}" defer></script>`}
 </body>
 </html>
 `;
@@ -848,10 +837,11 @@ ${page.app ? `<script src="/assets/namegen.js?v=${v.ng}" defer></script>\n<scrip
 // ---------------------------------------------------------------- build
 fs.rmSync(DIST, { recursive: true, force: true });
 fs.mkdirSync(path.join(DIST, 'assets'), { recursive: true });
-for (const f of ['style.css', 'namegen.js', 'app.js']) fs.copyFileSync(path.join(SRC, 'assets', f), path.join(DIST, 'assets', f));
+for (const f of ['style.css', 'namegen.js', 'name-tools.js', 'app.js']) fs.copyFileSync(path.join(SRC, 'assets', f), path.join(DIST, 'assets', f));
 const v = {
   css: hash(path.join(SRC, 'assets', 'style.css')),
   ng: hash(path.join(SRC, 'assets', 'namegen.js')),
+  tools: hash(path.join(SRC, 'assets', 'name-tools.js')),
   app: hash(path.join(SRC, 'assets', 'app.js'))
 };
 

@@ -43,7 +43,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700&family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="/assets/style.css?v=bc95ac1a">
+<link rel="stylesheet" href="/assets/style.css?v=2c943f08">
 <script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"WebApplication","name":"Elyos Name Generator","url":"https://www.aion2namegenerator.org/elyos-name-generator/","applicationCategory":"GameApplication","operatingSystem":"Any","browserRequirements":"Requires JavaScript","description":"Generate Elyos names for Aion 2. Bright, angelic male and female names inspired by Elysea and the Empyrean Lords, for every class. Free and instant.","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"}},{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Aion 2 Name Generator","item":"https://www.aion2namegenerator.org/"},{"@type":"ListItem","position":2,"name":"Elyos Name Generator","item":"https://www.aion2namegenerator.org/elyos-name-generator/"}]},{"@type":"FAQPage","mainEntity":[{"@type":"Question","name":"What do Elyos names sound like?","acceptedAnswer":{"@type":"Answer","text":"Elyos names are bright and melodic, with plenty of vowels and soft consonants like l, r, s and v. Many end in -iel or -ael, echoing Elyos Empyrean Lords such as Ariel, Kaisinel and Yustiel."}},{"@type":"Question","name":"Can I generate female Elyos names?","acceptedAnswer":{"@type":"Answer","text":"Yes. Set Gender to Female in the generator. Female Elyos names use endings like -ia, -ara, -ielle and -wyn, for example Celara, Lirielle or Aurwyn."}},{"@type":"Question","name":"Can I name my character after an Empyrean Lord?","acceptedAnswer":{"@type":"Answer","text":"This generator excludes exact matches to the twelve Empyrean Lords to help you find your own name. The Lore-inspired tone still uses their sound patterns. This is our originality filter, not an official restriction; check acceptance and availability in game."}}]}]}</script>
 </head>
 <body data-faction="elyos">
@@ -71,8 +71,9 @@
 <label class="field"><span>Max length: <b class="len-out">12</b></span><input type="range" name="maxLen" min="4" max="16" value="12" aria-describedby="length-note"></label>
 </div>
 <p class="hint length-note" id="length-note">Length is a tool preference, not a verified game limit. See the regional rules below.</p>
-<div class="gen-actions"><button class="btn" type="submit">Generate Names</button><button type="button" class="btn btn-ghost btn-sm copy-all">Copy all</button><p class="hint">Click a name to copy · ☆ save · ↻ spelling variants if it's taken</p></div>
+<div class="gen-actions"><button class="btn" type="submit">Generate Names</button><button type="button" class="btn btn-ghost btn-sm copy-all">Copy all</button><button type="button" class="btn btn-ghost btn-sm share-filters">Share filters</button><p class="hint">Click a name to copy · ☆ save · ↻ spelling variants if it's taken</p></div>
 </form>
+<div class="share-link-box" hidden><label class="field"><span>Link to these filters &amp; this batch</span><input type="text" readonly aria-label="Shareable filter link"></label><p class="hint">Anyone with this link can view the filters and recreate this batch. Saved names stay in your browser.</p></div>
 <details class="naming-rules" id="naming-rules">
 <summary>Name length &amp; regional rules <span>Global · KR · TW</span></summary>
 <p><strong>12 is this tool's default length preference.</strong> The slider lets you choose a maximum of 4–16 letters; generated names use A–Z only and have at least 3 letters. These are generator settings, not a guarantee that a name meets your region's game rules.</p>
@@ -85,10 +86,14 @@
 </tbody></table></div>
 <p class="hint">Sources reviewed October 9, 2026. The generator filters exact matches to a curated list of well-known Aion characters for originality; this is not an official reserved-name list. Availability and acceptance must be checked in game.</p>
 </details>
+<div class="list-toolbar"><span class="hint results-count">10 names</span><label class="sort-control"><span>Sort results</span><select class="result-sort"><option value="original">Generated order</option><option value="shortest">Length: shortest first</option><option value="longest">Length: longest first</option><option value="readability">Readability: highest first</option></select></label></div>
+<p class="hint sort-note">Readability uses our spelling heuristic; it is not a game rule or availability check.</p>
 <ul class="results" aria-live="polite"><li class="name-card" data-faction="elyos"><span class="name-text">Erar</span><span class="name-meta">Elyos · Male</span></li><li class="name-card" data-faction="elyos"><span class="name-text">Lyena</span><span class="name-meta">Elyos · Female</span></li><li class="name-card" data-faction="elyos"><span class="name-text">Ingus</span><span class="name-meta">Elyos · Male</span></li><li class="name-card" data-faction="elyos"><span class="name-text">Miel</span><span class="name-meta">Elyos · Female</span></li><li class="name-card" data-faction="elyos"><span class="name-text">Vena</span><span class="name-meta">Elyos · Female</span></li><li class="name-card" data-faction="elyos"><span class="name-text">Sewyn</span><span class="name-meta">Elyos · Female</span></li><li class="name-card" data-faction="elyos"><span class="name-text">Solarblaze</span><span class="name-meta">Elyos · Female</span></li><li class="name-card" data-faction="elyos"><span class="name-text">Pael</span><span class="name-meta">Elyos · Male</span></li><li class="name-card" data-faction="elyos"><span class="name-text">Kion</span><span class="name-meta">Elyos · Male</span></li><li class="name-card" data-faction="elyos"><span class="name-text">Lyraena</span><span class="name-meta">Elyos · Female</span></li></ul>
 </section>
 <section class="panel favorites" aria-label="Saved names">
-<div class="panel-head"><h3>★ Your saved names</h3><button type="button" class="btn btn-ghost btn-sm fav-clear" hidden>Clear</button></div>
+<div class="panel-head"><h3>★ Your saved names <span class="fav-count hint">0 / 100</span></h3><button type="button" class="btn btn-ghost btn-sm fav-clear" hidden>Clear</button></div>
+<div class="list-toolbar"><div class="shortlist-actions"><button type="button" class="btn btn-ghost btn-sm fav-copy" disabled>Copy saved names</button><button type="button" class="btn btn-ghost btn-sm fav-export" disabled>Export TXT</button></div><label class="sort-control"><span>Sort saved names</span><select class="fav-sort"><option value="original">Recently saved</option><option value="shortest">Length: shortest first</option><option value="longest">Length: longest first</option><option value="readability">Readability: highest first</option></select></label></div>
+<p class="hint">Up to 100 names, stored in this browser. Copy and TXT export use the displayed order. Readability is a spelling estimate.</p>
 <p class="fav-empty">Tap ☆ on any name to keep a shortlist here. It's stored only in your browser.</p>
 <ul class="results"></ul>
 </section>
@@ -128,6 +133,7 @@
 <p class="legal">© 2026 aion2namegenerator.org · <a href="/about/">About</a> · <a href="/privacy/">Privacy</a><br>Unofficial fan site, not affiliated with NCSOFT. AION is a trademark of NCSOFT Corporation.</p>
 </div></footer>
 <script src="/assets/namegen.js?v=646c7ea1" defer></script>
-<script src="/assets/app.js?v=251dbc6b" defer></script>
+<script src="/assets/name-tools.js?v=98f052f7" defer></script>
+<script src="/assets/app.js?v=0369661c" defer></script>
 </body>
 </html>
