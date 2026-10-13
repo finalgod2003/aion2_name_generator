@@ -6,6 +6,7 @@ import crypto from 'node:crypto';
 import { createRequire } from 'node:module';
 import { fileURLToPath } from 'node:url';
 import { CLASS_GUIDES } from './src/class-guides.mjs';
+import { TEMPLAR_PAGE } from './src/templar-guide.mjs';
 
 const require = createRequire(import.meta.url);
 const NG = require('./src/assets/namegen.js');
@@ -244,6 +245,9 @@ ${factionCards()}
 </div>
 ${classCards()}
 <div class="content">
+<h2>Learn to play your Templar</h2>
+<p>Planning a tank? Read our <a href="/aion-2-templar/">Aion 2 Templar guide</a> for core skills, leveling priorities, PvE and PvP build directions, gear choices and a first-dungeon checklist.</p>
+
 <h2>How to use the Aion 2 Name Generator</h2>
 <ol>
 <li><strong>Choose a faction.</strong> Elyos names are bright and flowing, Asmodian names are dark and sharp. Leave it on <em>Any</em> for a mix.</li>
@@ -388,6 +392,7 @@ CLASS_KEYS.forEach((k, i) => {
 ${favoritesPanel}
 <div class="content">
 ${classGuide(k)}
+${k === 'templar' ? '<p class="note">Building your tank as well as naming it? See the <a href="/aion-2-templar/">Aion 2 Templar skills, builds and gear guide</a>.</p>' : ''}
 
 <h2>Other Aion 2 class name generators</h2>
 </div>
@@ -645,6 +650,9 @@ ${factionCards('/aion-2-server-transfer/')}`,
   priority: '0.9'
 });
 
+// Templar gameplay guide; kept separate from the class naming pages.
+pages.push(TEMPLAR_PAGE);
+
 // About + privacy
 pages.push({
   path: '/about/',
@@ -713,7 +721,7 @@ function jsonLd(page) {
     });
   }
   if (page.schema === 'article') {
-    graph.push({ '@type': 'Article', headline: page.h1, description: page.description, url, dateModified: page.updated || SITE.updated, author: { '@type': 'Organization', name: SITE.name } });
+    graph.push({ '@type': 'Article', headline: page.h1, description: page.description, url, ...(page.published ? { datePublished: page.published } : {}), dateModified: page.updated || SITE.updated, author: { '@type': 'Organization', name: SITE.name } });
   }
   if (page.crumbs) {
     graph.push({
@@ -775,7 +783,7 @@ function layout(page, v) {
 <link rel="canonical" href="${url}">
 <meta name="robots" content="index,follow,max-image-preview:large">
 <meta name="theme-color" content="#0d0f17">
-<meta property="og:type" content="website">
+<meta property="og:type" content="${page.ogType || 'website'}">
 <meta property="og:site_name" content="${SITE.name}">
 <meta property="og:title" content="${esc(page.title)}">
 <meta property="og:description" content="${esc(page.description)}">
@@ -809,7 +817,7 @@ ${page.faq ? `<div class="content">${faqHtml(page.faq)}</div>` : ''}
 <div class="foot-grid">
 <div><h4>Aion 2 Name Generator</h4><p>Free, unofficial name generator for Aion 2 players. Elyos &amp; Asmodian names for every class.</p></div>
 <div><h4>Factions</h4><ul><li><a href="/">Aion 2 Name Generator</a></li><li><a href="/elyos-name-generator/">Elyos Names</a></li><li><a href="/asmodian-name-generator/">Asmodian Names</a></li><li><a href="/aion-2-names-list/">Names List &amp; Servers</a></li><li><a href="/aion-2-server-transfer/">Server Transfer</a></li></ul></div>
-<div><h4>Classes</h4><ul>${CLASS_KEYS.slice(0, 4).map((k) => `<li><a href="${classUrl(k)}">${NG.CLASSES[k].label} Names</a></li>`).join('')}</ul></div>
+<div><h4>Classes</h4><ul>${CLASS_KEYS.slice(0, 4).map((k) => `<li><a href="${classUrl(k)}">${NG.CLASSES[k].label} Names</a></li>`).join('')}<li><a href="/aion-2-templar/">Templar Class Guide</a></li></ul></div>
 <div><h4>&nbsp;</h4><ul>${CLASS_KEYS.slice(4).map((k) => `<li><a href="${classUrl(k)}">${NG.CLASSES[k].label} Names</a></li>`).join('')}</ul></div>
 </div>
 <p class="legal">© 2026 aion2namegenerator.org · <a href="/about/">About</a> · <a href="/privacy/">Privacy</a><br>Unofficial fan site, not affiliated with NCSOFT. AION is a trademark of NCSOFT Corporation.</p>
