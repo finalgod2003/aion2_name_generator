@@ -194,6 +194,29 @@ td.asmo { color: var(--asmo); font-weight: 600; }
 .toc a { display: block; padding: 5px 12px; border: 1px solid var(--line); border-radius: 999px; font-size: .86rem; text-decoration: none; color: var(--muted); }
 .toc a:hover { color: var(--text); border-color: var(--accent); }
 
+/* Hidden Cube guide */
+.cube-brief { display: grid; grid-template-columns: 132px 1fr; gap: 20px; align-items: center; overflow: hidden; margin: 20px 0 26px; padding: 20px 24px; border: 1px solid #634052; border-radius: var(--radius); background: radial-gradient(circle at 8% 50%, rgba(231, 96, 117, .2), transparent 42%), linear-gradient(120deg, #2a2033, var(--surface)); }
+.cube-brief-art { width: 132px; filter: drop-shadow(0 12px 24px rgba(231, 96, 117, .2)); }
+.cube-kicker, .cube-map-label { color: #f2a09c; font-size: .72rem; font-weight: 700; letter-spacing: .15em; text-transform: uppercase; }
+.cube-brief h2 { margin: 4px 0 10px; font-size: clamp(1.25rem, 2.6vw, 1.7rem); }
+.cube-brief p { margin: 0; color: var(--muted); }
+.cube-map-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; margin: 16px 0; }
+.cube-map-card { padding: 18px; border: 1px solid var(--line); border-radius: var(--radius); background: var(--surface); }
+.cube-map-elyos { border-top: 3px solid var(--elyos); }
+.cube-map-asmo { border-top: 3px solid var(--asmo); }
+.cube-map-elyos .cube-map-label { color: var(--elyos); }
+.cube-map-asmo .cube-map-label { color: var(--asmo); }
+.cube-map-card h3 { margin: 5px 0 8px; font-size: 1.3rem; }
+.cube-map-card p { min-height: 5.1em; color: var(--muted); font-size: .9rem; }
+.cube-map-card a { display: inline-block; font-size: .9rem; font-weight: 700; }
+.cube-steps li { padding-left: .25em; margin-bottom: .7em; }
+@media (max-width: 560px) {
+  .cube-brief { grid-template-columns: 74px 1fr; gap: 12px; padding: 16px; }
+  .cube-brief-art { width: 74px; }
+  .cube-map-grid { grid-template-columns: 1fr; }
+  .cube-map-card p { min-height: 0; }
+}
+
 /* Footer */
 .site-footer { margin-top: 60px; border-top: 1px solid var(--line); background: var(--bg-2); padding: 34px 0 26px; color: var(--muted); font-size: .9rem; }
 .foot-grid { display: grid; grid-template-columns: 1.4fr 1fr 1fr 1fr; gap: 22px; }

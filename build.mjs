@@ -7,6 +7,7 @@ import { createRequire } from 'node:module';
 import { fileURLToPath } from 'node:url';
 import { CLASS_GUIDES } from './src/class-guides.mjs';
 import { TEMPLAR_PAGE } from './src/templar-guide.mjs';
+import { HIDDEN_CUBES_PAGE } from './src/hidden-cubes.mjs';
 
 const require = createRequire(import.meta.url);
 const NG = require('./src/assets/namegen.js');
@@ -123,7 +124,8 @@ const HUB_CARDS = [
   ['/elyos-name-generator/', 'elyos', 'Light · Elysea', 'Elyos Name Generator', 'Bright, flowing names with angelic -iel and -ael endings.'],
   ['/asmodian-name-generator/', 'asmodian', 'Shadow · Asmodae', 'Asmodian Name Generator', 'Sharp, dark names built on hard Z, K and TH sounds.'],
   ['/aion-2-names-list/', '', 'Lists · Servers', 'Aion 2 Names List', 'Hundreds of ready-made names plus every Aion 2 server name.'],
-  ['/aion-2-server-transfer/', '', 'EA Oct 14 · Launch Oct 21', 'Aion 2 Server Transfer', 'Transfer windows, storage rules and a backup-name shortlist.']
+  ['/aion-2-server-transfer/', '', 'EA Oct 14 · Launch Oct 21', 'Aion 2 Server Transfer', 'Transfer windows, storage rules and a backup-name shortlist.'],
+  ['/aion-2-cubes/', '', 'Exploration · Hidden Cubes', 'Aion 2 Cubes', 'Find hidden cubes, get keys and learn what each opening can reward.']
 ];
 function factionCards(exclude) {
   return `<div class="cards">
@@ -652,6 +654,7 @@ ${factionCards('/aion-2-server-transfer/')}`,
 
 // Templar gameplay guide; kept separate from the class naming pages.
 pages.push(TEMPLAR_PAGE);
+pages.push(HIDDEN_CUBES_PAGE);
 
 // About + privacy
 pages.push({
@@ -816,7 +819,7 @@ ${page.faq ? `<div class="content">${faqHtml(page.faq)}</div>` : ''}
 <footer class="site-footer"><div class="wrap">
 <div class="foot-grid">
 <div><h4>Aion 2 Name Generator</h4><p>Free, unofficial name generator for Aion 2 players. Elyos &amp; Asmodian names for every class.</p></div>
-<div><h4>Factions</h4><ul><li><a href="/">Aion 2 Name Generator</a></li><li><a href="/elyos-name-generator/">Elyos Names</a></li><li><a href="/asmodian-name-generator/">Asmodian Names</a></li><li><a href="/aion-2-names-list/">Names List &amp; Servers</a></li><li><a href="/aion-2-server-transfer/">Server Transfer</a></li></ul></div>
+<div><h4>Factions</h4><ul><li><a href="/">Aion 2 Name Generator</a></li><li><a href="/elyos-name-generator/">Elyos Names</a></li><li><a href="/asmodian-name-generator/">Asmodian Names</a></li><li><a href="/aion-2-names-list/">Names List &amp; Servers</a></li><li><a href="/aion-2-server-transfer/">Server Transfer</a></li><li><a href="/aion-2-cubes/">Hidden Cubes</a></li></ul></div>
 <div><h4>Classes</h4><ul>${CLASS_KEYS.slice(0, 4).map((k) => `<li><a href="${classUrl(k)}">${NG.CLASSES[k].label} Names</a></li>`).join('')}<li><a href="/aion-2-templar/">Templar Class Guide</a></li></ul></div>
 <div><h4>&nbsp;</h4><ul>${CLASS_KEYS.slice(4).map((k) => `<li><a href="${classUrl(k)}">${NG.CLASSES[k].label} Names</a></li>`).join('')}</ul></div>
 </div>
